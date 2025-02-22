@@ -58,8 +58,20 @@ services:
     environment:
       ME_CONFIG_MONGODB_URL: mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo.db.discount:27017/
       ME_CONFIG_BASICAUTH: false
+  sqlserver.db.order:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver.db.order
+    user: root
+    environment:
+      SA_PASSWORD: ${SA_PASSWORD}
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver.db.order.value:/var/opt/mssql
 volumes:
   mongo.db.catalog.volume:
   redis.db.basket.volume:
   mongo.db.discount.volume:
+  sqlserver.db.order.value:
  
