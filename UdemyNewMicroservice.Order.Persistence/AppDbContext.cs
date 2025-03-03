@@ -10,6 +10,7 @@ namespace UdemyNewMicroservice.Order.Persistence
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Address> Addresses { get; set; }
 
+     
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(PersistenceAssembly).Assembly);
