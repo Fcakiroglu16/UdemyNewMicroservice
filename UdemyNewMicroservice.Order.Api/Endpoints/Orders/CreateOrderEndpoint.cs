@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using UdemyNewMicroservice.Order.Application.Features.Orders.Create;
+using UdemyNewMicroservice.Order.Application.Features.Orders.CreateOrder;
 using UdemyNewMicroservice.Shared.Extensions;
 using UdemyNewMicroservice.Shared.Filters;
 

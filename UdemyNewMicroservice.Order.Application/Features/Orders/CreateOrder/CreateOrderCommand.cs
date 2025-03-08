@@ -1,6 +1,6 @@
 ﻿using UdemyNewMicroservice.Shared;
 
-namespace UdemyNewMicroservice.Order.Application.Features.Orders.Create;
+namespace UdemyNewMicroservice.Order.Application.Features.Orders.CreateOrder;
 
 public record CreateOrderCommand(float? DiscountRate, AddressDto Address, PaymentDto Payment, List<OrderItemDto> Items) : IRequestByServiceResult;
 

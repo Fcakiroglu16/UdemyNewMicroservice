@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace UdemyNewMicroservice.Order.Application.Features.Orders.Create;
+namespace UdemyNewMicroservice.Order.Application.Features.Orders.CreateOrder;
 
 public class CreateOrderCommandValidator : AbstractValidator<CreateOrderCommand>
 {

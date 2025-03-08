@@ -6,7 +6,7 @@ POST {{baseAddress}}/api/v1/orders
 Content-Type: application/json
 Accept: application/json
 {
-  "DiscountRate": 1,
+  "DiscountRate": 10,
   "Address": {
     "Line": "123 Main St",
     "Province": "Ontario",
@@ -24,14 +24,17 @@ Accept: application/json
   "Items": [
     {
       "ProductId": "3762ff3a-4b07-4918-b478-d58df7edbffe",
-      "ProductName": "Course 1",
-      "UnitPrice": 50.25
+      "ProductName": "Course 15",
+      "UnitPrice": 100
     },
     {
       "ProductId": "b1acc2a7-d4bc-4ea2-ae11-ac2800548e82",
-      "ProductName": "Course 2",
-      "UnitPrice": 100.50
+      "ProductName": "Course 16",
+      "UnitPrice": 200
     }
   ]
 }
+### Get All Orders by User ID
+GET {{baseAddress}}/api/v1/orders
+Accept: application/json
 ###
