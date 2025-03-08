@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using UdemyNewMicroservice.Catalog.Api.Features.Categories;
+using UdemyNewMicroservice.Order.Application;
 using UdemyNewMicroservice.Order.Application.Contracts.Repositories;
 using UdemyNewMicroservice.Order.Application.Contracts.UnitOfWork;
 using UdemyNewMicroservice.Order.Persistence;
@@ -13,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddCommonServiceExt(typeof(OrderApplicationAssembly));
 builder.Services.AddDbContext<AppDbContext>(option => { option.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")); });
 builder.Services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
 

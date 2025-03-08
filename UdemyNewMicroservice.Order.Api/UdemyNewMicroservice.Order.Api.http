@@ -1,6 +1,37 @@
-@UdemyNewMicroservice.Order.Api_HostAddress = http://localhost:5231
+@baseAddress = http://localhost:5231
 
-GET {{UdemyNewMicroservice.Order.Api_HostAddress}}/weatherforecast/
+
+###
+POST {{baseAddress}}/api/v1/orders
+Content-Type: application/json
 Accept: application/json
-
+{
+  "DiscountRate": 1,
+  "Address": {
+    "Line": "123 Main St",
+    "Province": "Ontario",
+    "District": "Toronto",
+    "ZipCode": "12345",
+    "Street": "Main St"
+  },
+  "Payment": {
+    "CardNumber": "4111111111111111",
+    "CardHolderName": "John Doe",
+    "Expiration": "12/25",
+    "Cvc": "123",
+    "Amount": 150.75
+  },
+  "Items": [
+    {
+      "ProductId": "3762ff3a-4b07-4918-b478-d58df7edbffe",
+      "ProductName": "Course 1",
+      "UnitPrice": 50.25
+    },
+    {
+      "ProductId": "b1acc2a7-d4bc-4ea2-ae11-ac2800548e82",
+      "ProductName": "Course 2",
+      "UnitPrice": 100.50
+    }
+  ]
+}
 ###

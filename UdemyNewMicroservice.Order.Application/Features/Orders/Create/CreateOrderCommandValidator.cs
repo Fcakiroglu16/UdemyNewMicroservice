@@ -7,7 +7,7 @@ public class CreateOrderCommandValidator : AbstractValidator<CreateOrderCommand>
     public CreateOrderCommandValidator()
     {
         RuleFor(x => x.DiscountRate)
-            .GreaterThanOrEqualTo(0).When(x => x.DiscountRate.HasValue)
+            .GreaterThan(0).When(x => x.DiscountRate.HasValue)
             .WithMessage("{PropertyName} must be a positive number or zero");
 
         RuleFor(x => x.Address)
