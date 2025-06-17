@@ -1,6 +1,20 @@
-@UdemyNewMicroservice.Payment.Api_HostAddress = http://localhost:5029
+@baseAddress = http://localhost:5029
 
-GET {{UdemyNewMicroservice.Payment.Api_HostAddress}}/weatherforecast/
+
+
+### Create a Payment
+POST {{baseAddress}}/api/v1/payments
+Content-Type: application/json
 Accept: application/json
-
+{
+  "OrderCode": "6657c883-2e9b-43e4-a421-45f9ef25b415",
+  "CardNumber": "4111111111111111",
+  "CardHolderName": "John Doe",
+  "CardExpirationDate": "12/25",
+  "CardSecurityNumber": "123",
+  "Amount": 150.75
+}
+### Get All Payments
+GET {{baseAddress}}/api/v1/payments
+Accept: application/json
 ###
