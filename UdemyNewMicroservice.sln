@@ -45,6 +45,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyNewMicroservice.Order.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyNewMicroservice.Order.Persistence", "UdemyNewMicroservice.Order.Persistence\UdemyNewMicroservice.Order.Persistence.csproj", "{70B3B8D4-2B4C-4FF9-826F-8FBF4E10589F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "payment", "payment", "{CC1C678E-7391-44A6-9759-223A43F3874A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyNewMicroservice.Payment.Api", "UdemyNewMicroservice.Payment.Api\UdemyNewMicroservice.Payment.Api.csproj", "{0A0CE200-0655-5579-A932-9526A3DB0160}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +95,10 @@ Global
 		{70B3B8D4-2B4C-4FF9-826F-8FBF4E10589F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70B3B8D4-2B4C-4FF9-826F-8FBF4E10589F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70B3B8D4-2B4C-4FF9-826F-8FBF4E10589F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A0CE200-0655-5579-A932-9526A3DB0160}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A0CE200-0655-5579-A932-9526A3DB0160}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A0CE200-0655-5579-A932-9526A3DB0160}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A0CE200-0655-5579-A932-9526A3DB0160}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,6 +123,8 @@ Global
 		{F88CE5B8-A230-4B49-9996-E17BE60B0816} = {414D9E64-4756-4DF0-8B3D-86A146B13412}
 		{B4C4F90E-1864-446A-A3FC-CFC2559309EF} = {414D9E64-4756-4DF0-8B3D-86A146B13412}
 		{70B3B8D4-2B4C-4FF9-826F-8FBF4E10589F} = {015C1971-9CF2-4539-B796-848658A1E62D}
+		{CC1C678E-7391-44A6-9759-223A43F3874A} = {D38E75C1-6ADB-45E6-8F83-55671A8AA5DD}
+		{0A0CE200-0655-5579-A932-9526A3DB0160} = {CC1C678E-7391-44A6-9759-223A43F3874A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D4A3B2D0-F757-4001-A25A-D22548EF4BBE}
