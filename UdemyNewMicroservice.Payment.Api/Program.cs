@@ -1,4 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using UdemyNewMicroservice.Payment.Api;
+using UdemyNewMicroservice.Payment.Api.Repositories;
 using UdemyNewMicroservice.Shared.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddVersioningExt();
 builder.Services.AddCommonServiceExt(typeof(PaymentAssembly));
 
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseInMemoryDatabase("payment-in-memory-db");
+});
 var app = builder.Build();
 //app.AddFileGroupEndpointExt(app.AddVersionSetExt());
 // Configure the HTTP request pipeline.
