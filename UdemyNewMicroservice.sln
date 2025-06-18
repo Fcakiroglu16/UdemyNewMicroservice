@@ -51,7 +51,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyNewMicroservice.Paymen
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gateway", "gateway", "{C9523D2F-48FC-4449-B7E5-F70A44C48683}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyNewMicroservice.Gateway", "..\UdemyNewMicroservice.Gateway\UdemyNewMicroservice.Gateway.csproj", "{E1D774C2-F837-4380-803A-E27333F01FBD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyNewMicroservice.Gateway", "UdemyNewMicroservice.Gateway\UdemyNewMicroservice.Gateway.csproj", "{FF7012CC-F6B1-55D6-719B-1C2CC5B8F115}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -103,10 +103,10 @@ Global
 		{0A0CE200-0655-5579-A932-9526A3DB0160}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A0CE200-0655-5579-A932-9526A3DB0160}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A0CE200-0655-5579-A932-9526A3DB0160}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E1D774C2-F837-4380-803A-E27333F01FBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E1D774C2-F837-4380-803A-E27333F01FBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E1D774C2-F837-4380-803A-E27333F01FBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E1D774C2-F837-4380-803A-E27333F01FBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF7012CC-F6B1-55D6-719B-1C2CC5B8F115}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF7012CC-F6B1-55D6-719B-1C2CC5B8F115}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF7012CC-F6B1-55D6-719B-1C2CC5B8F115}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF7012CC-F6B1-55D6-719B-1C2CC5B8F115}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -134,7 +134,7 @@ Global
 		{CC1C678E-7391-44A6-9759-223A43F3874A} = {D38E75C1-6ADB-45E6-8F83-55671A8AA5DD}
 		{0A0CE200-0655-5579-A932-9526A3DB0160} = {CC1C678E-7391-44A6-9759-223A43F3874A}
 		{C9523D2F-48FC-4449-B7E5-F70A44C48683} = {D38E75C1-6ADB-45E6-8F83-55671A8AA5DD}
-		{E1D774C2-F837-4380-803A-E27333F01FBD} = {C9523D2F-48FC-4449-B7E5-F70A44C48683}
+		{FF7012CC-F6B1-55D6-719B-1C2CC5B8F115} = {C9523D2F-48FC-4449-B7E5-F70A44C48683}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D4A3B2D0-F757-4001-A25A-D22548EF4BBE}
