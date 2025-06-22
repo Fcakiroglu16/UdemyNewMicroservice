@@ -68,10 +68,57 @@ services:
     ports:
       - "1433:1433"
     volumes:
-      - sqlserver.db.order.value:/var/opt/mssql
+      - sqlserver.db.order.volume:/var/opt/mssql
+  keycloak:
+    restart: always
+    container_name: keycloak
+    image: quay.io/keycloak/keycloak:25.0
+    command: start
+    environment:
+      KC_HOSTNAME: keycloak
+      KC_HOSTNAME_PORT: 8080
+      KC_HOSTNAME_STRICT_BACKCHANNEL: false
+      KC_HTTP_ENABLED: true
+      KC_HOSTNAME_STRICT_HTTPS: false
+      KC_HEALTH_ENABLED: true
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres.db.keycloak/${POSTGRES_DB}
+      KC_DB_USERNAME: ${POSTGRES_USER}
+      KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres.db.keycloak
+  postgres.db.keycloak:
+    restart: always
+    image: postgres:16.2
+    container_name: postgres.db.keycloak.container
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - posrgres.db.keycloak.volume:/var/lib/postgresql/data
+  postgres.db.keycloak.ui:
+    restart: always
+    image: dpage/pgadmin4
+    container_name: postgres.db.keycloak.container.ui
+    ports:
+      - "8888:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user-name@domain-name.com
+      PGADMIN_DEFAULT_PASSWORD: strong-password
+    volumes:
+      - posrgres.db.keycloak.ui.volume:/var/lib/pgadmin
 volumes:
   mongo.db.catalog.volume:
   redis.db.basket.volume:
   mongo.db.discount.volume:
-  sqlserver.db.order.value:
+  sqlserver.db.order.volume:
+  posrgres.db.keycloak.volume:
+  posrgres.db.keycloak.ui.volume:
  
