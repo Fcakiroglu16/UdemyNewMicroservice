@@ -7,7 +7,7 @@ namespace UdemyNewMicroservice.Basket.Api.Features.Baskets
 {
     public class BasketService(IIdentityService identityService, IDistributedCache distributedCache)
     {
-        private string GetCacheKey() => string.Format(BasketConst.BasketCacheKey, identityService.GetUserId);
+        private string GetCacheKey() => string.Format(BasketConst.BasketCacheKey, identityService.UserId);
 
         public Task<string?> GetBasketFromCache(CancellationToken cancellationToken)
         {

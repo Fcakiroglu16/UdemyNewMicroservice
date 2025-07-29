@@ -1,5 +1,4 @@
-﻿using System.Security.Principal;
-using MediatR;
+﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using UdemyNewMicroservice.Payment.Api.Repositories;
 using UdemyNewMicroservice.Shared;
@@ -14,7 +13,7 @@ namespace UdemyNewMicroservice.Payment.Api.Feature.Payments.GetAllPaymentsByUser
             GetAllPaymentsByUserIdQuery request,
             CancellationToken cancellationToken)
         {
-            var userId = identityService.GetUserId;
+            var userId = identityService.UserId;
 
             var payments = await context.Payments
                 .Where(x => x.UserId == userId)

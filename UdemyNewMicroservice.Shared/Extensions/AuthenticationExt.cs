@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 using UdemyNewMicroservice.Shared.Options;
 
 namespace UdemyNewMicroservice.Shared.Extensions
@@ -28,13 +29,56 @@ namespace UdemyNewMicroservice.Shared.Extensions
                     ValidateAudience = true,
                     ValidateIssuerSigningKey = true,
                     ValidateLifetime = true,
-                    ValidateIssuer = true
+                    ValidateIssuer = true,
+                    RoleClaimType = "roles",
+                    NameClaimType = "preferred_username"
+                };
 
+
+            }).AddJwtBearer("ClientCredentialSchema", options =>
+            {
+
+                options.Authority = identityOptions.Address;
+                options.Audience = identityOptions.Audience;
+                options.RequireHttpsMetadata = false;
+
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+
+                    ValidateAudience = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true,
+                    ValidateIssuer = true,
+                    RoleClaimType = "roles",
+                    NameClaimType = "preferred_username"
                 };
 
 
             });
-            services.AddAuthorization();
+            services.AddAuthorization(options =>
+            {
+
+
+                options.AddPolicy("Password", policy =>
+                {
+
+                    policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+                    policy.RequireAuthenticatedUser();
+                    policy.RequireClaim(ClaimTypes.Email);
+
+                });
+
+                options.AddPolicy("ClientCredential", policy =>
+                {
+
+                    policy.AuthenticationSchemes.Add("ClientCredentialSchema");
+                    policy.RequireAuthenticatedUser();
+                    policy.RequireClaim("client_id");
+                });
+
+
+
+            });
 
             // Sign
             // Aud  => payment.api
