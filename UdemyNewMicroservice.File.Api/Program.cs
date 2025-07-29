@@ -1,6 +1,6 @@
 using Microsoft.Extensions.FileProviders;
-using UdemyNewMicroservice.Catalog.Api.Features.Courses;
 using UdemyNewMicroservice.Discount.Api;
+using UdemyNewMicroservice.File.Api.Features.File;
 using UdemyNewMicroservice.Shared.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +13,7 @@ builder.Services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Path.Combi
 builder.Services.AddCommonServiceExt(typeof(FileAssembly));
 builder.Services.AddVersioningExt();
 
-
+builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
 var app = builder.Build();
 app.AddFileGroupEndpointExt(app.AddVersionSetExt());
 
@@ -25,4 +25,6 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.UseAuthentication();
+app.UseAuthentication();
 app.Run();

@@ -13,8 +13,10 @@ builder.Services.AddCommonServiceExt(typeof(BasketAssembly));
 builder.Services.AddScoped<BasketService>();
 builder.Services.AddStackExchangeRedisCache(options => { options.Configuration = builder.Configuration.GetConnectionString("Redis"); });
 builder.Services.AddVersioningExt();
-var app = builder.Build();
 
+builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
+var app = builder.Build();
+app.AddBasketGroupEndpointExt(app.AddVersionSetExt());
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -22,6 +24,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.AddBasketGroupEndpointExt(app.AddVersionSetExt());
+app.UseAuthentication();
+app.UseAuthorization();
+
 
 app.Run();

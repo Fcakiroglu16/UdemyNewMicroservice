@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using UdemyNewMicroservice.Catalog.Api.Features.Categories;
+using UdemyNewMicroservice.Order.Api.Endpoints.Orders;
 using UdemyNewMicroservice.Order.Application;
 using UdemyNewMicroservice.Order.Application.Contracts.Repositories;
 using UdemyNewMicroservice.Order.Application.Contracts.UnitOfWork;
@@ -24,6 +24,8 @@ builder.Services.AddEndpointsApiExplorer();
 
 
 builder.Services.AddVersioningExt();
+
+builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
 var app = builder.Build();
 app.AddOrderGroupEndpointExt(app.AddVersionSetExt());
 // Configure the HTTP request pipeline.
@@ -36,5 +38,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.Run();

@@ -1,9 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using UdemyNewMicroservice.Payment.Api.Feature.GetAllPaymentsByUserId;
 using UdemyNewMicroservice.Shared.Extensions;
 
-namespace UdemyNewMicroservice.Payment.Api.Feature.Payments.Create
+namespace UdemyNewMicroservice.Payment.Api.Feature.Payments.GetAllPaymentsByUserId
 {
     public static class GetAllPaymentsByUserIdEndpoint
     {

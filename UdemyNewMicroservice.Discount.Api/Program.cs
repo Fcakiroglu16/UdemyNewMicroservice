@@ -1,5 +1,5 @@
-using UdemyNewMicroservice.Catalog.Api.Features.Courses;
 using UdemyNewMicroservice.Discount.Api;
+using UdemyNewMicroservice.Discount.Api.Features.Discounts;
 using UdemyNewMicroservice.Discount.Api.Options;
 using UdemyNewMicroservice.Discount.Api.Repositories;
 
@@ -16,7 +16,7 @@ builder.Services.AddDatabaseServiceExt();
 builder.Services.AddCommonServiceExt(typeof(DiscountAssembly));
 builder.Services.AddVersioningExt();
 
-
+builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
 var app = builder.Build();
 app.AddDiscountGroupEndpointExt(app.AddVersionSetExt());
 // Configure the HTTP request pipeline.
@@ -26,6 +26,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     app.MapOpenApi();
 }
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 
 app.Run();

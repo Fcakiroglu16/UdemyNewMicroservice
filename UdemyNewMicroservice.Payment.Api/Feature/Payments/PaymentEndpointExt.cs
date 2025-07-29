@@ -1,5 +1,6 @@
 ﻿using Asp.Versioning.Builder;
 using UdemyNewMicroservice.Payment.Api.Feature.Payments.Create;
+using UdemyNewMicroservice.Payment.Api.Feature.Payments.GetAllPaymentsByUserId;
 
 namespace UdemyNewMicroservice.Payment.Api.Feature.Payments
 {
@@ -8,7 +9,7 @@ namespace UdemyNewMicroservice.Payment.Api.Feature.Payments
         public static void AddPaymentGroupEndpointExt(this WebApplication app, ApiVersionSet apiVersionSet)
         {
             app.MapGroup("api/v{version:apiVersion}/payments").WithTags("payments").WithApiVersionSet(apiVersionSet)
-                .CreatePaymentGroupItemEndpoint().GetAllPaymentsByUserIdGroupItemEndpoint();
+                .CreatePaymentGroupItemEndpoint().GetAllPaymentsByUserIdGroupItemEndpoint().RequireAuthorization();
         }
     }
 }

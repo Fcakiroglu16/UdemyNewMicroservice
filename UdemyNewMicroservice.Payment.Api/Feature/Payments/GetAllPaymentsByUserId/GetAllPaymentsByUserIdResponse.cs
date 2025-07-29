@@ -1,6 +1,6 @@
 ﻿using UdemyNewMicroservice.Payment.Api.Repositories;
 
-namespace UdemyNewMicroservice.Payment.Api.Feature.GetAllPaymentsByUserId
+namespace UdemyNewMicroservice.Payment.Api.Feature.Payments.GetAllPaymentsByUserId
 {
     public record GetAllPaymentsByUserIdResponse(
         Guid Id,

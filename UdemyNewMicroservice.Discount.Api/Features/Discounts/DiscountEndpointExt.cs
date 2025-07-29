@@ -2,7 +2,7 @@
 using UdemyNewMicroservice.Discount.Api.Features.Discounts.CreateDiscount;
 
 
-namespace UdemyNewMicroservice.Catalog.Api.Features.Courses
+namespace UdemyNewMicroservice.Discount.Api.Features.Discounts
 {
     public static class DiscountEndpointExt
     {
@@ -10,7 +10,7 @@ namespace UdemyNewMicroservice.Catalog.Api.Features.Courses
         {
             app.MapGroup("api/v{version:apiVersion}/discounts").WithTags("discounts").WithApiVersionSet(apiVersionSet)
                 .CreateDiscountGroupItemEndpoint()
-                .GetDiscountByCodeGroupItemEndpoint();
+                .GetDiscountByCodeGroupItemEndpoint().RequireAuthorization();
         }
     }
 }
