@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\UdemyNewMicroservice.Bus\UdemyNewMicroservice.Bus.csproj" />
-    <ProjectReference Include="..\UdemyNewMicroservice.Order.Domain\UdemyNewMicroservice.Order.Domain.csproj" />
+    <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.5.2" />
   </ItemGroup>
 
 </Project>

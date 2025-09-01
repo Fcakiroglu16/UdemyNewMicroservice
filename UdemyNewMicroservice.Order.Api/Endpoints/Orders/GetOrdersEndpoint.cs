@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using UdemyNewMicroservice.Order.Application.Features.Orders.GetOrders;
+using UdemyNewMicroservice.Order.Application.UseCases.Orders.GetOrders;
 using UdemyNewMicroservice.Shared.Extensions;
 
 namespace UdemyNewMicroservice.Order.Api.Endpoints.Orders;

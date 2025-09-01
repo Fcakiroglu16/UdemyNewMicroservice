@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using MassTransit;
 
 namespace UdemyNewMicroservice.Order.Domain.Entities;
 
@@ -22,7 +21,7 @@ public class Order : BaseEntity<Guid>
     public Guid? PaymentId { get; set; }
 
 
-    public List<OrderItem> OrderItems { get; set; } = new();
+    public List<OrderItem> OrderItems { get; set; } = [];
 
     public Address Address { get; set; } = null!;
 
@@ -40,7 +39,7 @@ public class Order : BaseEntity<Guid>
     {
         return new Order
         {
-            Id = NewId.NextGuid(),
+            Id = Guid.CreateVersion7(),
             Code = GenerateCode(),
             BuyerId = buyerId,
             Created = DateTime.Now,
@@ -55,7 +54,7 @@ public class Order : BaseEntity<Guid>
     {
         return new Order
         {
-            Id = NewId.NextGuid(),
+            Id = Guid.CreateVersion7(),
             Code = GenerateCode(),
             BuyerId = buyerId,
             Created = DateTime.Now,
@@ -82,7 +81,8 @@ public class Order : BaseEntity<Guid>
 
     public void ApplyDiscount(float discountPercentage)
     {
-        if (discountPercentage < 0 || discountPercentage > 100) throw new ArgumentNullException("Discount percentage must be between 0 and 100");
+        if (discountPercentage < 0 || discountPercentage > 100)
+            throw new ArgumentNullException("Discount percentage must be between 0 and 100");
         DiscountRate = discountPercentage;
         CalculateTotalPrice();
     }

@@ -6,13 +6,19 @@ using UdemyNewMicroservice.Order.Domain.Entities;
 using UdemyNewMicroservice.Shared;
 using UdemyNewMicroservice.Shared.Services;
 
-namespace UdemyNewMicroservice.Order.Application.Features.Orders.CreateOrder;
+namespace UdemyNewMicroservice.Order.Application.UseCases.Orders.CreateOrder;
 
-public class CreateOrderCommandHandler(IOrderRepository orderRepository, IGenericRepository<int, Address> addressRepository, IIdentityService identityService, IUnitOfWork unitOfWork) : IRequestHandler<CreateOrderCommand, ServiceResult>
+public class CreateOrderCommandHandler(
+    IOrderRepository orderRepository,
+    IGenericRepository<int, Address> addressRepository,
+    IIdentityService identityService,
+    IUnitOfWork unitOfWork) : IRequestHandler<CreateOrderCommand, ServiceResult>
 {
     public async Task<ServiceResult> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
-        if (!request.Items.Any()) return ServiceResult.Error("Order items not found", "Order must have at least one item", HttpStatusCode.BadRequest);
+        if (!request.Items.Any())
+            return ServiceResult.Error("Order items not found", "Order must have at least one item",
+                HttpStatusCode.BadRequest);
 
 
         var newAddress = new Address
@@ -25,8 +31,10 @@ public class CreateOrderCommandHandler(IOrderRepository orderRepository, IGeneri
         };
 
 
-        var order = Domain.Entities.Order.CreateUnPaidOrder(identityService.UserId, request.DiscountRate, newAddress.Id);
-        foreach (var orderItem in request.Items) order.AddOrderItem(orderItem.ProductId, orderItem.ProductName, orderItem.UnitPrice);
+        var order = Domain.Entities.Order.CreateUnPaidOrder(identityService.UserId, request.DiscountRate,
+            newAddress.Id);
+        foreach (var orderItem in request.Items)
+            order.AddOrderItem(orderItem.ProductId, orderItem.ProductName, orderItem.UnitPrice);
 
 
         order.Address = newAddress;

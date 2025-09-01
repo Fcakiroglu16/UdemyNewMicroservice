@@ -14,7 +14,6 @@
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.7" />
-    <PackageReference Include="NewId" Version="4.0.1" />
     <PackageReference Include="Refit.HttpClientFactory" Version="7.2.1" />
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
