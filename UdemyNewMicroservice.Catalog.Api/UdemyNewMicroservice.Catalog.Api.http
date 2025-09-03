@@ -23,7 +23,6 @@ Content-Type: application/json
   "name": "New Course 1",
   "description": "This is a new course",
   "price": 99.99,
-  "imageUrl": "http://example.com/picture.jpg",
   "categoryId": "{{categoryId}}"
 }
 ###
@@ -36,7 +35,7 @@ Content-Type: application/json
   "name": "New Course 33",
   "description": "This is a new course 33",
   "price": 199.99,
-  "imageUrl": "http://example.com/picture2.jpg",
+  "imageUrl": ,
   "categoryId": "{{categoryId}}"
 }
 ###
