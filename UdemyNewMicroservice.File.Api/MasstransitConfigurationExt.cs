@@ -1,12 +1,12 @@
 ﻿using MassTransit;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+using UdemyNewMicroservice.Bus;
+using UdemyNewMicroservice.File.Api.Consumers;
 
-namespace UdemyNewMicroservice.Bus
+namespace UdemyNewMicroservice.File.Api
 {
     public static class MasstransitConfigurationExt
     {
-        public static IServiceCollection AddCommonMasstransitExt(this IServiceCollection services,
+        public static IServiceCollection AddMasstransitExt(this IServiceCollection services,
             IConfiguration configuration)
         {
             var busOptions = configuration.GetSection(nameof(BusOption)).Get<BusOption>()!;
@@ -14,6 +14,9 @@ namespace UdemyNewMicroservice.Bus
 
             services.AddMassTransit(configure =>
             {
+                configure.AddConsumer<UploadCoursePictureCommandConsumer>();
+
+
                 configure.UsingRabbitMq((ctx, cfg) =>
                 {
                     cfg.Host(new Uri($"rabbitmq://{busOptions.Address}:{busOptions.Port}"), host =>
@@ -22,11 +25,11 @@ namespace UdemyNewMicroservice.Bus
                         host.Password(busOptions.Password);
                     });
 
+                    cfg.ReceiveEndpoint("file-microservice.upload-course-picture-command.queue",
+                        e => { e.ConfigureConsumer<UploadCoursePictureCommandConsumer>(ctx); });
 
-                    cfg.ConfigureEndpoints(ctx);
 
-                    //cfg.ReceiveEndpoint("basket-microservice.create-order-event.queue",
-                    //    e => { e.ConfigureConsumer<CreateOrderEventConsumer>(context); });
+                    // cfg.ConfigureEndpoints(ctx);
                 });
             });
 

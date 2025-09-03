@@ -46,8 +46,9 @@ namespace UdemyNewMicroservice.Catalog.Api.Features.Courses.Create
 
                 var PictureAsByteArray = memoryStream.ToArray();
 
+
                 var uploadCoursePictureCommand =
-                    new UploadCoursePictureCommand(newCourse.Id, PictureAsByteArray);
+                    new UploadCoursePictureCommand(newCourse.Id, PictureAsByteArray, request.Picture.FileName);
 
                 await publishEndpoint.Publish(uploadCoursePictureCommand, cancellationToken);
             }
