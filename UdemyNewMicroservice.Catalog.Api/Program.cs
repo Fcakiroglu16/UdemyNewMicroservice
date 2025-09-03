@@ -1,4 +1,3 @@
-using UdemyNewMicroservice.Bus;
 using UdemyNewMicroservice.Catalog.Api;
 using UdemyNewMicroservice.Catalog.Api.Features.Categories;
 using UdemyNewMicroservice.Catalog.Api.Features.Courses;
@@ -11,7 +10,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddOptionsExt();
 builder.Services.AddDatabaseServiceExt();
 builder.Services.AddCommonServiceExt(typeof(CatalogAssembly));
-builder.Services.AddCommonMasstransitExt(builder.Configuration);
+builder.Services.AddMasstransitExt(builder.Configuration);
 builder.Services.AddVersioningExt();
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
 var app = builder.Build();
