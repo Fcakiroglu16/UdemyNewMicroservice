@@ -1,5 +1,5 @@
 @baseAddress = http://localhost:5280
-@categoryId=08dd388a-4d2d-7b2d-e0d0-45b778850000
+@categoryId=08ddeac9-294f-b52b-1b62-9e59b8fd0000
 @courseId=08dd388a-7742-7bcb-e0d0-45b778850000
 @userId=9e590000-1b62-04bf-09c6-08dcff11d209
 GET {{baseAddress}}/api/v1/categories

@@ -1,6 +1,8 @@
-﻿namespace UdemyNewMicroservice.Catalog.Api.Features.Courses.Create
+﻿using UdemyNewMicroservice.Bus.Commands;
+
+namespace UdemyNewMicroservice.Catalog.Api.Features.Courses.Create
 {
-    public class CreateCourseCommandHandler(AppDbContext context, IMapper mapper)
+    public class CreateCourseCommandHandler(AppDbContext context, IMapper mapper, IPublishEndpoint publishEndpoint)
         : IRequestHandler<CreateCourseCommand, ServiceResult<Guid>>
     {
         public async Task<ServiceResult<Guid>> Handle(CreateCourseCommand request, CancellationToken cancellationToken)
@@ -36,6 +38,20 @@
 
             context.Courses.Add(newCourse);
             await context.SaveChangesAsync(cancellationToken);
+
+            if (request.Picture is not null)
+            {
+                using var memoryStream = new MemoryStream();
+                await request.Picture.CopyToAsync(memoryStream, cancellationToken);
+
+                var PictureAsByteArray = memoryStream.ToArray();
+
+                var uploadCoursePictureCommand =
+                    new UploadCoursePictureCommand(newCourse.Id, PictureAsByteArray);
+
+                await publishEndpoint.Publish(uploadCoursePictureCommand, cancellationToken);
+            }
+
 
             return ServiceResult<Guid>.SuccessAsCreated(newCourse.Id, $"/api/courses/{newCourse.Id}");
         }
