@@ -11,6 +11,7 @@ services:
     volumes:
       - mongo.db.catalog.volume:/data/db
   mongo.db.catalog.ui:
+    restart: always
     image: mongo-express:1.0.2-20-alpine3.19
     container_name: mongo.db.catalog.ui.container
     ports:
@@ -51,6 +52,7 @@ services:
     volumes:
       - mongo.db.discount.volume:/data/db
   mongo.db.discount.ui:
+    restart: always
     image: mongo-express:1.0.2-20-alpine3.19
     container_name: mongo.db.discount.ui.container
     ports:
@@ -59,6 +61,7 @@ services:
       ME_CONFIG_MONGODB_URL: mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo.db.discount:27017/
       ME_CONFIG_BASICAUTH: false
   sqlserver.db.order:
+    restart: always
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sqlserver.db.order
     user: root
@@ -114,6 +117,20 @@ services:
       PGADMIN_DEFAULT_PASSWORD: strong-password
     volumes:
       - posrgres.db.keycloak.ui.volume:/var/lib/pgadmin
+  rabbitmq:
+    restart: always
+    image: rabbitmq:3.13.7-management
+    container_name: rabbitmq
+    ports:
+      - 5672:5672  
+      - 15672:15672 
+    environment:
+      RABBITMQ_DEFAULT_USER: root
+      RABBITMQ_DEFAULT_PASS: Password12
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+
 volumes:
   mongo.db.catalog.volume:
   redis.db.basket.volume:
@@ -121,4 +138,4 @@ volumes:
   sqlserver.db.order.volume:
   posrgres.db.keycloak.volume:
   posrgres.db.keycloak.ui.volume:
- 
+  rabbitmq_data:
