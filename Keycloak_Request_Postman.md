@@ -1,4 +1,4 @@
-
+ï»¿
 
 
 ---Client Credential flow by Endpoint-----------------------------------------
@@ -27,7 +27,7 @@ curl --location 'http://localhost:8080/realms/udemyTenant/protocol/openid-connec
 ----User Create Endpoint---------------------------------------------------------
 curl --location 'http://localhost:8080/admin/realms/udemyTenant/users' \
 --header 'Content-Type: application/json' \
---header 'Authorization: ••••••' \
+--header 'Authorization: â€¢â€¢â€¢â€¢â€¢â€¢' \
 --data-raw '{
   "username": "fcakiroglu17",
   "enabled": true,
@@ -42,3 +42,11 @@ curl --location 'http://localhost:8080/admin/realms/udemyTenant/users' \
     }
   ]
 }'
+
+---- Sigin In Endpoint---------------------------------------------------------
+curl --location 'http://localhost:5280/api/v1/courses' \
+--form 'name="course 3"' \
+--form 'picture=@"/C:/Users/f-cak/OneDrive/MasaÃ¼stÃ¼/images.jpg"' \
+--form 'description="course 1 AÃ§Ä±klama"' \
+--form 'price="200"' \
+--form 'categoryId="08ddeac9-294f-b52b-1b62-9e59b8fd0000"'
