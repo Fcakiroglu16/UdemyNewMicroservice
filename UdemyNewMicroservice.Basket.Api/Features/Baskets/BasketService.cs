@@ -9,6 +9,8 @@ namespace UdemyNewMicroservice.Basket.Api.Features.Baskets
     {
         private string GetCacheKey() => string.Format(BasketConst.BasketCacheKey, identityService.UserId);
 
+        private string GetCacheKey(Guid userId) => string.Format(BasketConst.BasketCacheKey, userId);
+
         public Task<string?> GetBasketFromCache(CancellationToken cancellationToken)
         {
             return distributedCache.GetStringAsync(GetCacheKey(), token: cancellationToken);
@@ -18,6 +20,11 @@ namespace UdemyNewMicroservice.Basket.Api.Features.Baskets
         {
             var basketAsString = JsonSerializer.Serialize(basket);
             await distributedCache.SetStringAsync(GetCacheKey(), basketAsString, token: cancellationToken);
+        }
+
+        public async Task DeleteBasket(Guid userId)
+        {
+            await distributedCache.RemoveAsync(GetCacheKey(userId));
         }
     }
 }
