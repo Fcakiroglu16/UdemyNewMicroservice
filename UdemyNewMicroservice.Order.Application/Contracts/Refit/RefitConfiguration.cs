@@ -13,7 +13,7 @@ namespace UdemyNewMicroservice.Order.Application.Contracts.Refit
             IConfiguration configuration)
         {
             services.AddScoped<AuthenticatedHttpClientHandler>();
-
+            services.AddScoped<ClientAuthenticatedHttpClientHandler>();
 
             services.AddOptions<IdentityOption>().BindConfiguration(nameof(IdentityOption)).ValidateDataAnnotations()
                 .ValidateOnStart();
@@ -30,12 +30,13 @@ namespace UdemyNewMicroservice.Order.Application.Contracts.Refit
 
 
             services.AddRefitClient<IPaymentService>().ConfigureHttpClient(configure =>
-            {
-                var addressUrlOption = configuration.GetSection(nameof(AddressUrlOption)).Get<AddressUrlOption>();
+                {
+                    var addressUrlOption = configuration.GetSection(nameof(AddressUrlOption)).Get<AddressUrlOption>();
 
 
-                configure.BaseAddress = new Uri(addressUrlOption!.PaymentUrl);
-            }).AddHttpMessageHandler<AuthenticatedHttpClientHandler>();
+                    configure.BaseAddress = new Uri(addressUrlOption!.PaymentUrl);
+                }).AddHttpMessageHandler<AuthenticatedHttpClientHandler>()
+                .AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
 
 
             return services;

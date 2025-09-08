@@ -16,11 +16,11 @@ namespace UdemyNewMicroservice.Payment.Api.Feature.Payments.GetStatus
 
             if (payment is null)
             {
-                return ServiceResult<GetPaymentStatusResponse>.SuccessAsOk(new GetPaymentStatusResponse(false));
+                return ServiceResult<GetPaymentStatusResponse>.SuccessAsOk(new GetPaymentStatusResponse(null, false));
             }
 
             return ServiceResult<GetPaymentStatusResponse>.SuccessAsOk(
-                new GetPaymentStatusResponse(payment.Status == PaymentStatus.Success));
+                new GetPaymentStatusResponse(payment.Id, payment.Status == PaymentStatus.Success));
         }
     }
 }

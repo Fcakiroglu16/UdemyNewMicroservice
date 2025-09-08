@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using UdemyNewMicroservice.Bus;
 using UdemyNewMicroservice.Order.Api.Endpoints.Orders;
 using UdemyNewMicroservice.Order.Application;
+using UdemyNewMicroservice.Order.Application.BackgroundServices;
 using UdemyNewMicroservice.Order.Application.Contracts.Refit;
 using UdemyNewMicroservice.Order.Application.Contracts.Repositories;
 using UdemyNewMicroservice.Order.Application.Contracts.UnitOfWork;
@@ -32,6 +33,7 @@ builder.Services.AddVersioningExt();
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
 builder.Services.AddRefitConfigurationExt(builder.Configuration);
 
+builder.Services.AddHostedService<CheckPaymentStatusOrderBackgroundService>();
 
 var app = builder.Build();
 app.AddOrderGroupEndpointExt(app.AddVersionSetExt());
