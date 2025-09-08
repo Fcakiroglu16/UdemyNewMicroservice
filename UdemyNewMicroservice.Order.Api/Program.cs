@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using UdemyNewMicroservice.Bus;
 using UdemyNewMicroservice.Order.Api.Endpoints.Orders;
 using UdemyNewMicroservice.Order.Application;
+using UdemyNewMicroservice.Order.Application.Contracts.Refit;
 using UdemyNewMicroservice.Order.Application.Contracts.Repositories;
 using UdemyNewMicroservice.Order.Application.Contracts.UnitOfWork;
 using UdemyNewMicroservice.Order.Persistence;
@@ -27,10 +28,11 @@ builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddEndpointsApiExplorer();
 
-
 builder.Services.AddVersioningExt();
-
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
+builder.Services.AddRefitConfigurationExt(builder.Configuration);
+
+
 var app = builder.Build();
 app.AddOrderGroupEndpointExt(app.AddVersionSetExt());
 // Configure the HTTP request pipeline.

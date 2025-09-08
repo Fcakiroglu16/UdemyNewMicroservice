@@ -1,5 +1,4 @@
-﻿using MediatR;
-using UdemyNewMicroservice.Shared;
+﻿using UdemyNewMicroservice.Shared;
 
 namespace UdemyNewMicroservice.Payment.Api.Feature.Payments.Create
 {
@@ -9,5 +8,5 @@ namespace UdemyNewMicroservice.Payment.Api.Feature.Payments.Create
         string CardHolderName,
         string CardExpirationDate,
         string CardSecurityNumber,
-        decimal Amount) : IRequestByServiceResult<Guid>;
+        decimal Amount) : IRequestByServiceResult<CreatePaymentResponse>;
 }
