@@ -1,6 +1,7 @@
 ﻿using MassTransit;
 using MediatR;
 using System.Net;
+using UdemyNewMicroservice.Order.Application.Contracts.Refit.PaymentService;
 using UdemyNewMicroservice.Order.Application.Contracts.Repositories;
 using UdemyNewMicroservice.Order.Application.Contracts.UnitOfWork;
 using UdemyNewMicroservice.Order.Domain.Entities;
@@ -14,7 +15,8 @@ public class CreateOrderCommandHandler(
     IGenericRepository<int, Address> addressRepository,
     IIdentityService identityService,
     IUnitOfWork unitOfWork,
-    IPublishEndpoint publishEndpoint) : IRequestHandler<CreateOrderCommand, ServiceResult>
+    IPublishEndpoint publishEndpoint,
+    IPaymentService paymentService) : IRequestHandler<CreateOrderCommand, ServiceResult>
 {
     public async Task<ServiceResult> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
@@ -45,12 +47,17 @@ public class CreateOrderCommandHandler(
         orderRepository.Add(order);
         await unitOfWork.CommitAsync(cancellationToken);
 
-        var paymentId = Guid.Empty;
+
+        CreatePaymentRequest paymentRequest = new CreatePaymentRequest(order.Code, request.Payment.CardNumber,
+            request.Payment.CardHolderName, request.Payment.Expiration, request.Payment.Cvc, order.TotalPrice);
+        var paymentResponse = await paymentService.CreateAsync(paymentRequest);
 
 
-        //Payment işlemleri yapılacak
+        if (paymentResponse.Status == false)
+            return ServiceResult.Error(paymentResponse.ErrorMessage!, HttpStatusCode.InternalServerError);
 
-        order.SetPaidStatus(paymentId);
+
+        order.SetPaidStatus(paymentResponse.PaymentId!.Value);
 
         orderRepository.Update(order);
         await unitOfWork.CommitAsync(cancellationToken);
