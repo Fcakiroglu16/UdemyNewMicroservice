@@ -1,7 +1,14 @@
+using UdemyNewMicroservice.Web.Extensions;
+using UdemyNewMicroservice.Web.Pages.Auth.SignUp;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddOptionsExt();
+
+
+builder.Services.AddHttpClient<SignUpService>();
 
 var app = builder.Build();
 
@@ -17,6 +24,6 @@ app.UseAuthorization();
 
 app.MapStaticAssets();
 app.MapRazorPages()
-   .WithStaticAssets();
+    .WithStaticAssets();
 
 app.Run();

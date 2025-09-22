@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Duende.IdentityModel" Version="7.1.0" />
+  </ItemGroup>
+
 </Project>
