@@ -1,19 +1,54 @@
 ﻿using Duende.IdentityModel.Client;
 using UdemyNewMicroservice.Web.Options;
+using UdemyNewMicroservice.Web.Services;
 
 namespace UdemyNewMicroservice.Web.Pages.Auth.SignUp
 {
-    public class SignUpService(IdentityOption identityOption, HttpClient client)
+    public class SignUpService(IdentityOption identityOption, HttpClient client, ILogger<SignUpService> logger)
     {
-        public async Task<string> GetClientCredentialTokenAsAdmin()
+        public async Task<ServiceResult> CreateAccount(SignUpViewModel model)
+        {
+            var token = await GetClientCredentialTokenAsAdmin();
+
+            var address = $"{identityOption.BaseAddress}/admin/realms/udemyTenant/users";
+
+            client.SetBearerToken(token);
+
+            var userCreateRequest = CreateUserCreateRequest(model);
+
+            var response = await client.PostAsJsonAsync(address, userCreateRequest);
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                logger.LogError(error);
+
+
+                return ServiceResult.Error("System Error occurred. Please try again later.");
+            }
+
+            return ServiceResult.Success();
+        }
+
+        private static UserCreateRequest CreateUserCreateRequest(SignUpViewModel model)
+        {
+            return new UserCreateRequest(
+                model.UserName,
+                true,
+                model.FirstName,
+                model.LastName,
+                model.Email,
+                [new Credential("password", model.Password, false)]);
+        }
+
+        private async Task<string> GetClientCredentialTokenAsAdmin()
         {
             var discoveryRequest = new DiscoveryDocumentRequest()
             {
-                Address = identityOption.Admin.Address,
+                Address = identityOption.Address,
                 Policy = { RequireHttps = false }
             };
 
-            client.BaseAddress = new Uri(identityOption.Admin.Address);
+            client.BaseAddress = new Uri(identityOption.Address);
             var discoveryResponse = await client.GetDiscoveryDocumentAsync();
 
             if (discoveryResponse.IsError)
