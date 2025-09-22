@@ -60,6 +60,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyNewMicroservice.Bus", "UdemyNewMicroservice.Bus\UdemyNewMicroservice.Bus.csproj", "{8CC63B5A-76C7-4172-9AFA-CEBD952C2580}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ui", "ui", "{90C1A933-DBEA-4823-86D3-4C4A607A8567}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyNewMicroservice.Web", "UdemyNewMicroservice.Web\UdemyNewMicroservice.Web.csproj", "{CABC4426-D97A-4F71-8119-A8727BE2ABDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -118,6 +122,10 @@ Global
 		{8CC63B5A-76C7-4172-9AFA-CEBD952C2580}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CC63B5A-76C7-4172-9AFA-CEBD952C2580}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CC63B5A-76C7-4172-9AFA-CEBD952C2580}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CABC4426-D97A-4F71-8119-A8727BE2ABDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CABC4426-D97A-4F71-8119-A8727BE2ABDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CABC4426-D97A-4F71-8119-A8727BE2ABDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CABC4426-D97A-4F71-8119-A8727BE2ABDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -147,6 +155,8 @@ Global
 		{C9523D2F-48FC-4449-B7E5-F70A44C48683} = {D38E75C1-6ADB-45E6-8F83-55671A8AA5DD}
 		{FF7012CC-F6B1-55D6-719B-1C2CC5B8F115} = {C9523D2F-48FC-4449-B7E5-F70A44C48683}
 		{8CC63B5A-76C7-4172-9AFA-CEBD952C2580} = {6157B32A-2BD9-4F57-B0C0-AB02FA3BC9AE}
+		{90C1A933-DBEA-4823-86D3-4C4A607A8567} = {E655B4E8-AF92-4086-8C8B-4B7D78303D7C}
+		{CABC4426-D97A-4F71-8119-A8727BE2ABDA} = {90C1A933-DBEA-4823-86D3-4C4A607A8567}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D4A3B2D0-F757-4001-A25A-D22548EF4BBE}
