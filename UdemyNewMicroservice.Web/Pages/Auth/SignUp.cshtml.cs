@@ -15,19 +15,22 @@ namespace UdemyNewMicroservice.Web.Pages.Auth
 
         public async Task<IActionResult> OnPostAsync()
         {
-            //validation
             var result = await signUpService.CreateAccount(SignUpViewModel);
 
 
             if (result.IsFail)
             {
-                //show error
+                ModelState.AddModelError(string.Empty, result.Fail.Title);
+
+                if (!string.IsNullOrEmpty(result.Fail.Detail))
+                {
+                    ModelState.AddModelError(string.Empty, result.Fail.Detail);
+                }
+
                 return Page();
             }
-            else
-            {
-                return RedirectToPage("/Index");
-            }
+
+            return RedirectToPage("/Index");
         }
     }
 }

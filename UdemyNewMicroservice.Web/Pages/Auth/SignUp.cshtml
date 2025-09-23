@@ -8,9 +8,13 @@
 
     <div class="col-md-4">
         <h2 class="text-center">Sign Up</h2>
+        
+        <div asp-validation-summary="ModelOnly" >
+
+        </div>
         <form method="post">
             <div class="mb-3">
-                <label asp-for="SignUpViewModel.FirstName" class="form-label"></label>
+                <label asp-for="SignUpViewModel.UserName" class="form-label"></label>
                 <input asp-for="SignUpViewModel.UserName" class="form-control" />
                 <div class="text-danger">
                     <span asp-validation-for="SignUpViewModel.UserName"></span>

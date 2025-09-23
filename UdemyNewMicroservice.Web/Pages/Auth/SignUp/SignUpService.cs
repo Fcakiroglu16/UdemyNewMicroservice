@@ -1,9 +1,12 @@
 ﻿using Duende.IdentityModel.Client;
+using System.Net;
 using UdemyNewMicroservice.Web.Options;
 using UdemyNewMicroservice.Web.Services;
 
 namespace UdemyNewMicroservice.Web.Pages.Auth.SignUp
 {
+    public record KeycloakErrorResponse(string ErrorMessage);
+
     public class SignUpService(IdentityOption identityOption, HttpClient client, ILogger<SignUpService> logger)
     {
         public async Task<ServiceResult> CreateAccount(SignUpViewModel model)
@@ -19,10 +22,15 @@ namespace UdemyNewMicroservice.Web.Pages.Auth.SignUp
             var response = await client.PostAsJsonAsync(address, userCreateRequest);
             if (!response.IsSuccessStatusCode)
             {
+                if (response.StatusCode != HttpStatusCode.InternalServerError)
+                {
+                    var keycloakErrorResponse = await response.Content.ReadFromJsonAsync<KeycloakErrorResponse>();
+
+                    return ServiceResult.Error(keycloakErrorResponse!.ErrorMessage);
+                }
+
                 var error = await response.Content.ReadAsStringAsync();
                 logger.LogError(error);
-
-
                 return ServiceResult.Error("System Error occurred. Please try again later.");
             }
 
