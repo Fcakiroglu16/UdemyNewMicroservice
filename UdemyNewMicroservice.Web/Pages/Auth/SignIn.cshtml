@@ -1,0 +1,35 @@
+﻿@page
+@model UdemyNewMicroservice.Web.Pages.Auth.SignInModel
+<div class="row justify-content-center mt-5">
+
+    <div class="col-md-4">
+        <h2 class="text-center">Sign Up</h2>
+
+        <div asp-validation-summary="ModelOnly">
+        </div>
+        <form method="post">
+
+            <div class="mb-3">
+                <label asp-for="SignInViewModel.Email" class="form-label"></label>
+                <input asp-for="SignInViewModel.Email" class="form-control" />
+                <div class="text-danger">
+                    <span asp-validation-for="SignInViewModel.Email"></span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label asp-for="SignInViewModel.Password" class="form-label"></label>
+                <input asp-for="SignInViewModel.Password" type="password" class="form-control" />
+                <div class="text-danger">
+                    <span asp-validation-for="SignInViewModel.Password"></span>
+                </div>
+            </div>
+           
+            <button type="submit" class="btn btn-primary">Sign In</button>
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

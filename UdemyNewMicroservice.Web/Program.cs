@@ -1,4 +1,5 @@
 using UdemyNewMicroservice.Web.Extensions;
+using UdemyNewMicroservice.Web.Pages.Auth.SignIn;
 using UdemyNewMicroservice.Web.Pages.Auth.SignUp;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +11,7 @@ builder.Services.AddOptionsExt();
 
 
 builder.Services.AddHttpClient<SignUpService>();
-
+builder.Services.AddHttpClient<SignInService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
