@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UdemyNewMicroservice.Web.Pages.Auth.SignIn;
@@ -26,6 +28,12 @@ namespace UdemyNewMicroservice.Web.Pages.Auth
                 return Page();
             }
 
+            return RedirectToPage("/Index");
+        }
+
+        public async Task<IActionResult> OnGetSignOutAsync()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToPage("/Index");
         }
     }
