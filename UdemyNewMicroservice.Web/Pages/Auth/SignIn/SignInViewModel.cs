@@ -22,7 +22,7 @@ namespace UdemyNewMicroservice.Web.Pages.Auth.SignIn
 
         public static SignInViewModel GetExampleModel => new()
         {
-            Email = "fcakiroglu16@outlook.com",
+            Email = "f-cakiroglu@outlook.com",
             Password = "Password12*",
         };
     }

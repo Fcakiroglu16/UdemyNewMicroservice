@@ -16,13 +16,13 @@ namespace UdemyNewMicroservice.Web.Pages.Auth
         {
             if (!ModelState.IsValid) return Page();
 
-            var result = await signInService.SignInAsync(SignInViewModel);
+            var result = await signInService.AuthenticateAsync(SignInViewModel);
 
             if (result.IsFail)
             {
-                ModelState.AddModelError(string.Empty, result.Fail.Title);
+                ModelState.AddModelError(string.Empty, result.Fail!.Title!);
 
-                ModelState.AddModelError(string.Empty, result.Fail.Detail);
+                ModelState.AddModelError(string.Empty, result.Fail!.Detail!);
                 return Page();
             }
 

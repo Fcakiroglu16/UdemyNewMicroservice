@@ -1,12 +1,20 @@
 ﻿using Duende.IdentityModel.Client;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
 using UdemyNewMicroservice.Web.Options;
 using UdemyNewMicroservice.Web.Services;
 
 namespace UdemyNewMicroservice.Web.Pages.Auth.SignIn
 {
-    public class SignInService(IdentityOption identityOption, HttpClient client, ILogger<SignInService> logger)
+    public class SignInService(
+        IHttpContextAccessor contextAccessor,
+        TokenService tokenService,
+        IdentityOption identityOption,
+        HttpClient client,
+        ILogger<SignInService> logger)
     {
-        public async Task<ServiceResult> SignInAsync(SignInViewModel signInViewModel)
+        public async Task<ServiceResult> AuthenticateAsync(SignInViewModel signInViewModel)
         {
             var tokenResponse = await GetAccessToken(signInViewModel);
 
@@ -15,6 +23,21 @@ namespace UdemyNewMicroservice.Web.Pages.Auth.SignIn
                 return ServiceResult.Error(tokenResponse.Error!, tokenResponse.ErrorDescription!);
             }
 
+
+            var userClaims = tokenService.ExtractClaims(tokenResponse.AccessToken!);
+
+            var authenticationProperties = tokenService.CreateAuthenticationProperties(tokenResponse);
+
+
+            var claimIdentity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme,
+                ClaimTypes.Name, ClaimTypes.Role);
+
+
+            var claimsPrincipal = new ClaimsPrincipal(claimIdentity);
+
+
+            await contextAccessor.HttpContext!.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                claimsPrincipal, authenticationProperties);
 
             return ServiceResult.Success();
         }
