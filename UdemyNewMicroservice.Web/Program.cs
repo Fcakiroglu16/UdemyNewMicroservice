@@ -1,10 +1,14 @@
 #region
 
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Refit;
+using UdemyNewMicroservice.Web.DelegateHandlers;
 using UdemyNewMicroservice.Web.Extensions;
+using UdemyNewMicroservice.Web.Options;
 using UdemyNewMicroservice.Web.Pages.Auth.SignIn;
 using UdemyNewMicroservice.Web.Pages.Auth.SignUp;
 using UdemyNewMicroservice.Web.Services;
+using UdemyNewMicroservice.Web.Services.Refit;
 
 #endregion
 
@@ -20,6 +24,15 @@ builder.Services.AddHttpClient<SignUpService>();
 builder.Services.AddHttpClient<SignInService>();
 builder.Services.AddHttpClient<TokenService>();
 builder.Services.AddHttpContextAccessor();
+
+
+builder.Services.AddRefitClient<ICatalogRefitService>().ConfigureHttpClient(configure =>
+    {
+        var gatewayOption = builder.Configuration.GetSection(nameof(GatewayOption)).Get<GatewayOption>();
+        configure.BaseAddress = new Uri(gatewayOption!.BaseAddress);
+    }).AddHttpMessageHandler<AuthenticatedHttpClientHandler>()
+    .AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
+
 
 builder.Services.AddAuthentication(configureOption =>
     {

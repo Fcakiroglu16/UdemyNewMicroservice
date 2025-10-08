@@ -1,10 +1,10 @@
 ﻿#region
 
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using Duende.IdentityModel.Client;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using UdemyNewMicroservice.Web.Options;
 
 #endregion
@@ -79,6 +79,37 @@ public class TokenService(HttpClient client, IdentityOption identityOption)
             RefreshToken = refreshToken
         });
 
+
+        return tokenResponse;
+    }
+
+
+    public async Task<TokenResponse> GetClientAccessToken()
+    {
+        var discoveryRequest = new DiscoveryDocumentRequest
+        {
+            Address = identityOption.Address,
+            Policy = { RequireHttps = false }
+        };
+
+
+        client.BaseAddress = new Uri(identityOption.Address);
+        var discoveryResponse = await client.GetDiscoveryDocumentAsync();
+
+
+        if (discoveryResponse.IsError)
+            throw new Exception($"Discovery document request failed: {discoveryResponse.Error}");
+
+
+        var tokenResponse = await client.RequestClientCredentialsTokenAsync(
+            new ClientCredentialsTokenRequest
+            {
+                Address = discoveryResponse.TokenEndpoint,
+                ClientId = identityOption.Web.ClientId,
+                ClientSecret = identityOption.Web.ClientSecret
+            });
+
+        if (tokenResponse.IsError) throw new Exception($"Token request failed: {tokenResponse.Error}");
 
         return tokenResponse;
     }
