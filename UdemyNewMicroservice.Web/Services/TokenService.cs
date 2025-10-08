@@ -1,53 +1,85 @@
-﻿using Duende.IdentityModel.Client;
+﻿#region
+
+using Duende.IdentityModel.Client;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using UdemyNewMicroservice.Web.Options;
 
-namespace UdemyNewMicroservice.Web.Services
+#endregion
+
+namespace UdemyNewMicroservice.Web.Services;
+
+public class TokenService(HttpClient client, IdentityOption identityOption)
 {
-    public class TokenService
+    public List<Claim> ExtractClaims(string accessToken)
     {
-        public List<Claim> ExtractClaims(string accessToken)
+        var handler = new JwtSecurityTokenHandler();
+
+        var jwtWebToken = handler.ReadJwtToken(accessToken);
+
+
+        return jwtWebToken.Claims.ToList();
+    }
+
+    public AuthenticationProperties CreateAuthenticationProperties(TokenResponse tokenResponse)
+    {
+        var authenticationTokens = new List<AuthenticationToken>
         {
-            var handler = new JwtSecurityTokenHandler();
+            new()
+            {
+                Name = OpenIdConnectParameterNames.AccessToken,
+                Value = tokenResponse.AccessToken!
+            },
+            new()
+            {
+                Name = OpenIdConnectParameterNames.RefreshToken,
+                Value = tokenResponse.RefreshToken!
+            },
+            new()
+            {
+                Name = OpenIdConnectParameterNames.ExpiresIn,
+                Value = DateTime.Now.AddSeconds(tokenResponse.ExpiresIn!).ToString("o")
+            }
+        };
 
-            var jwtWebToken = handler.ReadJwtToken(accessToken);
 
-
-            return jwtWebToken.Claims.ToList();
-        }
-
-        public AuthenticationProperties CreateAuthenticationProperties(TokenResponse tokenResponse)
+        AuthenticationProperties authenticationProperties = new()
         {
-            var authenticationTokens = new List<AuthenticationToken>
-            {
-                new()
-                {
-                    Name = OpenIdConnectParameterNames.AccessToken,
-                    Value = tokenResponse.AccessToken!
-                },
-                new()
-                {
-                    Name = OpenIdConnectParameterNames.RefreshToken,
-                    Value = tokenResponse.RefreshToken!
-                },
-                new()
-                {
-                    Name = OpenIdConnectParameterNames.ExpiresIn,
-                    Value = DateTime.Now.AddSeconds(tokenResponse.ExpiresIn!).ToString("o")
-                }
-            };
+            IsPersistent = true
+        };
+
+        authenticationProperties.StoreTokens(authenticationTokens);
+
+        return authenticationProperties;
+    }
 
 
-            AuthenticationProperties authenticationProperties = new()
-            {
-                IsPersistent = true
-            };
+    public async Task<TokenResponse> GetTokensByRefreshToken(string refreshToken)
+    {
+        var discoveryRequest = new DiscoveryDocumentRequest
+        {
+            Address = identityOption.Address,
+            Policy = { RequireHttps = false }
+        };
 
-            authenticationProperties.StoreTokens(authenticationTokens);
+        client.BaseAddress = new Uri(identityOption.Address);
+        var discoveryResponse = await client.GetDiscoveryDocumentAsync();
 
-            return authenticationProperties;
-        }
+        if (discoveryResponse.IsError)
+            throw new Exception($"Discovery document request failed: {discoveryResponse.Error}");
+
+
+        var tokenResponse = await client.RequestRefreshTokenAsync(new RefreshTokenRequest
+        {
+            Address = discoveryResponse.TokenEndpoint,
+            ClientId = identityOption.Web.ClientId,
+            ClientSecret = identityOption.Web.ClientSecret,
+            RefreshToken = refreshToken
+        });
+
+
+        return tokenResponse;
     }
 }

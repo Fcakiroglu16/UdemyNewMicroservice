@@ -1,8 +1,12 @@
+#region
+
 using Microsoft.AspNetCore.Authentication.Cookies;
 using UdemyNewMicroservice.Web.Extensions;
 using UdemyNewMicroservice.Web.Pages.Auth.SignIn;
 using UdemyNewMicroservice.Web.Pages.Auth.SignUp;
 using UdemyNewMicroservice.Web.Services;
+
+#endregion
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +18,7 @@ builder.Services.AddOptionsExt();
 
 builder.Services.AddHttpClient<SignUpService>();
 builder.Services.AddHttpClient<SignInService>();
-builder.Services.AddSingleton<TokenService>();
+builder.Services.AddHttpClient<TokenService>();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddAuthentication(configureOption =>
@@ -35,10 +39,7 @@ builder.Services.AddAuthorization();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Error");
-}
+if (!app.Environment.IsDevelopment()) app.UseExceptionHandler("/Error");
 
 app.UseRouting();
 
