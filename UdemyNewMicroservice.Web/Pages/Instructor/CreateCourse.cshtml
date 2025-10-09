@@ -1,0 +1,50 @@
+﻿@page
+@model UdemyNewMicroservice.Web.Pages.Instructor.CreateCourseModel
+@{
+    Layout = "_Layout";
+}
+<div class="row">
+    <h2>Create Course</h2>
+    <div asp-validation-summary="ModelOnly" class="alert alert-warning text-bg-warning   border-warning"></div>
+    <form method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label asp-for="ViewModel.CategoryDropdownList" class="form-label"></label>
+            <select asp-for="ViewModel.CategoryId" class="form-select" asp-items="@Model.ViewModel.CategoryDropdownList">
+                <option value="">Select Category</option>
+            </select>
+            <span asp-validation-for="ViewModel.CategoryId" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="ViewModel.Name" class="form-label"></label>
+            <input asp-for="ViewModel.Name" class="form-control">
+            <span asp-validation-for="ViewModel.Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="ViewModel.Description" class="form-label"></label>
+            <textarea asp-for="ViewModel.Description" class="form-control"></textarea>
+            <span asp-validation-for="ViewModel.Description" class="text-danger"></span>
+        </div>
+
+
+        <div class="mb-3">
+            <label asp-for="ViewModel.PictureFormFile" class="form-label"></label>
+            <input asp-for="ViewModel.PictureFormFile" class="form-control" type="file">
+            <span asp-validation-for="ViewModel.PictureFormFile" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ViewModel.Price" class="form-label"></label>
+            <input asp-for="ViewModel.Price" class="form-control" type="number" step="0.01">
+            <span asp-validation-for="ViewModel.Price" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Course</button>
+    </form>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("Shared/_ValidationScriptsPartial");
+    }
+}
