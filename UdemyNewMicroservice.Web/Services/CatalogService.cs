@@ -21,7 +21,7 @@ public class CatalogService(ICatalogRefitService catalogRefitService, ILogger<Ca
             return ServiceResult<List<CategoryViewModel>>.Error("Fail to retrieve categories. Please try again later");
         }
 
-        var categories = response!.Content!.Data!
+        var categories = response!.Content!
             .Select(c => new CategoryViewModel(c.Id, c.Name))
             .ToList();
         return ServiceResult<List<CategoryViewModel>>.Success(categories);

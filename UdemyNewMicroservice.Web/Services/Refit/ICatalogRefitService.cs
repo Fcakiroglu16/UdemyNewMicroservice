@@ -9,17 +9,17 @@ namespace UdemyNewMicroservice.Web.Services.Refit;
 
 public interface ICatalogRefitService
 {
-    [Get("/v1/catalog/categories")]
-    Task<ApiResponse<ServiceResult<List<CategoryDto>>>> GetCategoriesAsync();
+    [Get("/api/v1/categories")]
+    Task<ApiResponse<List<CategoryDto>>> GetCategoriesAsync();
 
-    [Post("/v1/catalog/courses")]
-    Task<ApiResponse<ServiceResult>> CreateCourseAsync(CreateCourseRequest request);
-
-
-    [Put("/v1/catalog/courses")]
-    Task<ApiResponse<ServiceResult>> UpdateCourseAsync(UpdateCourseRequest request);
+    [Post("/api/v1/courses")]
+    Task<ApiResponse<object>> CreateCourseAsync(CreateCourseRequest request);
 
 
-    [Delete("/v1/catalog/courses/{id}")]
-    Task<ApiResponse<ServiceResult>> DeleteCourseAsync(Guid id);
+    [Put("/api/v1/courses")]
+    Task<ApiResponse<object>> UpdateCourseAsync(UpdateCourseRequest request);
+
+
+    [Delete("/api/v1/courses/{id}")]
+    Task<ApiResponse<object>> DeleteCourseAsync(Guid id);
 }
