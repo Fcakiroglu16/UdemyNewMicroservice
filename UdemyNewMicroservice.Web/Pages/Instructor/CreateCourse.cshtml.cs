@@ -1,5 +1,6 @@
 #region
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UdemyNewMicroservice.Web.Pages.Instructor.ViewModel;
 using UdemyNewMicroservice.Web.Services;
@@ -8,6 +9,7 @@ using UdemyNewMicroservice.Web.Services;
 
 namespace UdemyNewMicroservice.Web.Pages.Instructor;
 
+[Authorize(Roles = "instructor")]
 public class CreateCourseModel(CatalogService catalogService) : PageModel
 {
     public CreateCourseViewModel ViewModel { get; set; } = CreateCourseViewModel.Empty;
