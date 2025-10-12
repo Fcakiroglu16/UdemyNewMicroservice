@@ -8,4 +8,11 @@ public record CourseViewModel(
     string ImageUrl,
     string CategoryName,
     int Duration,
-    float Rating);
+    float Rating)
+{
+    public string TruncateDescription(int maxLength)
+    {
+        if (Description.Length <= maxLength) return Description;
+        return Description.Substring(0, maxLength) + "...";
+    }
+}

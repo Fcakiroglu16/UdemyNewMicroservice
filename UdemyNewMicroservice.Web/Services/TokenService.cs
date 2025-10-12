@@ -11,7 +11,7 @@ using UdemyNewMicroservice.Web.Options;
 
 namespace UdemyNewMicroservice.Web.Services;
 
-public class TokenService(HttpClient client, IdentityOption identityOption)
+public class TokenService(IHttpClientFactory httpClientFactory, IdentityOption identityOption)
 {
     public List<Claim> ExtractClaims(string accessToken)
     {
@@ -63,7 +63,7 @@ public class TokenService(HttpClient client, IdentityOption identityOption)
             Address = identityOption.Address,
             Policy = { RequireHttps = false }
         };
-
+        var client = httpClientFactory.CreateClient("GetTokensByRefreshToken");
         client.BaseAddress = new Uri(identityOption.Address);
         var discoveryResponse = await client.GetDiscoveryDocumentAsync();
 
@@ -92,7 +92,7 @@ public class TokenService(HttpClient client, IdentityOption identityOption)
             Policy = { RequireHttps = false }
         };
 
-
+        var client = httpClientFactory.CreateClient("GetClientAccessToken");
         client.BaseAddress = new Uri(identityOption.Address);
         var discoveryResponse = await client.GetDiscoveryDocumentAsync();
 

@@ -1,5 +1,6 @@
 #region
 
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UdemyNewMicroservice.Web.Pages.Instructor.ViewModel;
 using UdemyNewMicroservice.Web.Services;
@@ -22,5 +23,17 @@ public class CoursesModel(CatalogService catalogService) : PageModel
         }
 
         CourseViewModels = result.Data!;
+    }
+
+
+    public async Task<IActionResult> OnGetDeleteAsync(Guid id)
+    {
+        var result = await catalogService.DeleteAsync(id);
+        if (result.IsFail)
+        {
+            //TODO : redirect error page
+        }
+
+        return RedirectToPage();
     }
 }

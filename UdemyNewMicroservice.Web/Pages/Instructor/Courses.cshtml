@@ -1,6 +1,8 @@
 ﻿@page
 @model UdemyNewMicroservice.Web.Pages.Instructor.CoursesModel
-
+@{
+    Layout = "_Instructor_Layout";
+}
 
 <table class="table table-striped">
     <thead>
@@ -25,13 +27,12 @@
                 <tr>
                     <th scope="row">@index</th>
                     <td>
-                      @*   <course-picture class="img-fluid img-thumbnail" src="@course.PictureUrl" width="100px" /> *@
+                        <course-thumbnail-picture with="100px" class="img-fluid img-thumbnail" src="@course.ImageUrl"></course-thumbnail-picture>
                     </td>
                     <td>@course.Name</td>
-                    <td>@course.Description</td>
+                    <td>@course.TruncateDescription(100)</td>
                     <td>@course.Price.ToString("C")</td>
                     <td>@course.CategoryName</td>
-                    <td>@course.</td>
                     <td>@course.Rating</td>
                     <td>@course.Duration</td>
                     <td>

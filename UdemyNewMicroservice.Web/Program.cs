@@ -3,6 +3,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Refit;
 using UdemyNewMicroservice.Web.DelegateHandlers;
+using UdemyNewMicroservice.Web.ExceptionHandlers;
 using UdemyNewMicroservice.Web.Extensions;
 using UdemyNewMicroservice.Web.Options;
 using UdemyNewMicroservice.Web.Pages.Auth.SignIn;
@@ -22,14 +23,14 @@ builder.Services.AddOptionsExt();
 
 builder.Services.AddHttpClient<SignUpService>();
 builder.Services.AddHttpClient<SignInService>();
-builder.Services.AddHttpClient<TokenService>();
+builder.Services.AddScoped<TokenService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<CatalogService>();
 builder.Services.AddScoped<UserService>();
 
 builder.Services.AddScoped<AuthenticatedHttpClientHandler>();
 builder.Services.AddScoped<ClientAuthenticatedHttpClientHandler>();
-
+builder.Services.AddExceptionHandler<UnauthorizedAccessExceptionHandler>();
 
 builder.Services.AddRefitClient<ICatalogRefitService>().ConfigureHttpClient(configure =>
     {

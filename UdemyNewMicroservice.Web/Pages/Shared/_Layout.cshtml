@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -36,6 +37,13 @@
                                     @User.Identity.Name
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    
+                                    
+                                    @if (User.Claims.Any(x => x is { Type: ClaimTypes.Role, Value: "instructor" }))
+                                    {
+                                    <li><a class="dropdown-item" asp-page="/Instructor/Index">Instructor</a></li>
+                                    }
+
                                     <li><a class="dropdown-item" asp-page="/Profile">My Profile</a></li>
                                     <li><a class="dropdown-item" asp-page="/Orders">My Orders</a></li>
                                     <li><hr class="dropdown-divider"></li>

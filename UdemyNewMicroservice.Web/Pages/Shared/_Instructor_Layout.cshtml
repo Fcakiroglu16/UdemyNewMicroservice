@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - UdemyNewMicroservice.Web</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/UdemyNewMicroservice.Web.styles.css" asp-append-version="true" />
+</head>
+<body>
+
+
+    <partial name="_Instructor_Header_Dark" />
+
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-9">
+          @*       <partial name="_Error" />
+                <partial name="_Success" /> *@
+                @RenderBody()
+            </div>
+            <div class="col-md-3">
+
+
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                        Menu
+                    </a>
+                    <a asp-page="/Instructor/Index" class="list-group-item list-group-item-action">Home Page</a>
+                    <a asp-page="/Instructor/Courses" class="list-group-item list-group-item-action">Course List</a>
+                    <a asp-page="/Instructor/CreateCourse" class="list-group-item list-group-item-action">Create Course</a>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <partial name="_Instructor_Footer" />
+    
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
