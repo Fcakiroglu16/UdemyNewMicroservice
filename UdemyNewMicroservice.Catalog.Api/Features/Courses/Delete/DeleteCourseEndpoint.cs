@@ -1,38 +1,31 @@
-﻿using UdemyNewMicroservice.Catalog.Api.Features.Courses.GetById;
+﻿namespace UdemyNewMicroservice.Catalog.Api.Features.Courses.Delete;
 
-namespace UdemyNewMicroservice.Catalog.Api.Features.Courses.Delete
+public record DeleteCourseCommand(Guid Id) : IRequestByServiceResult;
+
+public class DeleteCourseHandler(AppDbContext context) : IRequestHandler<DeleteCourseCommand, ServiceResult>
 {
-    public record DeleteCourseCommand(Guid Id) : IRequestByServiceResult;
-
-
-    public class DeleteCourseHandler(AppDbContext context) : IRequestHandler<DeleteCourseCommand, ServiceResult>
+    public async Task<ServiceResult> Handle(DeleteCourseCommand request, CancellationToken cancellationToken)
     {
-        public async Task<ServiceResult> Handle(DeleteCourseCommand request, CancellationToken cancellationToken)
-        {
-            var hasCourse = await context.Courses.FindAsync([request.Id], cancellationToken: cancellationToken);
-            if (hasCourse == null)
-            {
-                return ServiceResult.ErrorAsNotFound();
-            }
+        var hasCourse = await context.Courses.FindAsync([request.Id], cancellationToken);
+        if (hasCourse == null) return ServiceResult.ErrorAsNotFound();
 
-            context.Courses.Remove(hasCourse);
-            await context.SaveChangesAsync(cancellationToken);
+        context.Courses.Remove(hasCourse);
+        await context.SaveChangesAsync(cancellationToken);
 
-            return ServiceResult.SuccessAsNoContent();
-        }
+        return ServiceResult.SuccessAsNoContent();
     }
+}
 
-    public static class DeleteCourseEndpoint
+public static class DeleteCourseEndpoint
+{
+    public static RouteGroupBuilder DeleteCourseGroupItemEndpoint(this RouteGroupBuilder group)
     {
-        public static RouteGroupBuilder DeleteCourseGroupItemEndpoint(this RouteGroupBuilder group)
-        {
-            group.MapDelete("/{id:guid}",
-                    async (IMediator mediator, Guid id) =>
-                        (await mediator.Send(new DeleteCourseCommand(id))).ToGenericResult())
-                .WithName("DeleteCourse")
-                .MapToApiVersion(1, 0);
+        group.MapDelete("/{id:guid}",
+                async (IMediator mediator, Guid id) =>
+                    (await mediator.Send(new DeleteCourseCommand(id))).ToGenericResult())
+            .WithName("DeleteCourse")
+            .MapToApiVersion(1, 0).RequireAuthorization(policyNames: "InstructorPolicy");
 
-            return group;
-        }
+        return group;
     }
 }

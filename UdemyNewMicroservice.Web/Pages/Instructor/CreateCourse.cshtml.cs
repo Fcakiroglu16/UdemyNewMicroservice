@@ -1,6 +1,7 @@
 #region
 
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UdemyNewMicroservice.Web.Pages.Instructor.ViewModel;
 using UdemyNewMicroservice.Web.Services;
@@ -12,9 +13,9 @@ namespace UdemyNewMicroservice.Web.Pages.Instructor;
 [Authorize(Roles = "instructor")]
 public class CreateCourseModel(CatalogService catalogService) : PageModel
 {
-    public CreateCourseViewModel ViewModel { get; set; } = CreateCourseViewModel.Empty;
+    [BindProperty] public CreateCourseViewModel ViewModel { get; set; } = CreateCourseViewModel.Empty;
 
-    public async Task OnGet()
+    public async Task OnGetAsync()
     {
         var categoriesResult = await catalogService.GetCategoriesAsync();
 
@@ -25,5 +26,17 @@ public class CreateCourseModel(CatalogService catalogService) : PageModel
         }
 
         ViewModel.SetCategoryDropdownList(categoriesResult.Data!);
+    }
+
+    public async Task<IActionResult> OnPostAsync()
+    {
+        var result = await catalogService.CreateCourseAsync(ViewModel);
+
+        if (!result.IsSuccess)
+        {
+            //TODO : Show error
+        }
+
+        return RedirectToPage("Courses");
     }
 }
