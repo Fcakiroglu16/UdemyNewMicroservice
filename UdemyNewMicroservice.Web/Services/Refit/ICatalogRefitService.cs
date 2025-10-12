@@ -12,6 +12,11 @@ public interface ICatalogRefitService
     [Get("/api/v1/categories")]
     Task<ApiResponse<List<CategoryDto>>> GetCategoriesAsync();
 
+
+    [Get("/api/v1/courses/user/{userId}")]
+    Task<ApiResponse<List<CourseDto>>> GetCoursesByUserId(Guid UserId);
+
+
     [Multipart]
     [Post("/api/v1/courses")]
     Task<ApiResponse<object>> CreateCourseAsync(
