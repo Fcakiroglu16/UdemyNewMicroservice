@@ -1,6 +1,7 @@
 #region
 
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using UdemyNewMicroservice.Web.Pages.Instructor.ViewModel;
 using UdemyNewMicroservice.Web.Services;
 
 #endregion
@@ -9,7 +10,17 @@ namespace UdemyNewMicroservice.Web.Pages.Instructor;
 
 public class CoursesModel(CatalogService catalogService) : PageModel
 {
-    public void OnGet()
+    public List<CourseViewModel> CourseViewModels { get; set; } = null!;
+
+    public async Task OnGetAsync()
     {
+        var result = await catalogService.GetCoursesByUserId();
+
+        if (result.IsFail)
+        {
+            //TODO : redirect error page
+        }
+
+        CourseViewModels = result.Data!;
     }
 }

@@ -1,4 +1,54 @@
 ﻿@page
 @model UdemyNewMicroservice.Web.Pages.Instructor.CoursesModel
-@{
-}
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <td>Picture</td>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+            <th scope="col">Category Name</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Duration</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.CourseViewModels.Any())
+        {
+            var index = 1;
+            foreach (var course in Model.CourseViewModels)
+            {
+                <tr>
+                    <th scope="row">@index</th>
+                    <td>
+                      @*   <course-picture class="img-fluid img-thumbnail" src="@course.PictureUrl" width="100px" /> *@
+                    </td>
+                    <td>@course.Name</td>
+                    <td>@course.Description</td>
+                    <td>@course.Price.ToString("C")</td>
+                    <td>@course.CategoryName</td>
+                    <td>@course.</td>
+                    <td>@course.Rating</td>
+                    <td>@course.Duration</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a asp-page="Update" asp-route-id="@course.Id" class="btn btn-sm btn-primary">Edit</a>
+                            <a asp-page-handler="Delete" asp-route-id="@course.Id" class="btn btn-sm btn-danger">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                index++;
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="10" class="text-center">No courses available.</td>
+            </tr>
+        }
+    </tbody>
+</table>

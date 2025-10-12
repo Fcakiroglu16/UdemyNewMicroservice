@@ -10,7 +10,10 @@ using ProblemDetails = Microsoft.AspNetCore.Mvc.ProblemDetails;
 
 namespace UdemyNewMicroservice.Web.Services;
 
-public class CatalogService(ICatalogRefitService catalogRefitService, ILogger<CatalogService> logger)
+public class CatalogService(
+    ICatalogRefitService catalogRefitService,
+    UserService userService,
+    ILogger<CatalogService> logger)
 {
     public async Task<ServiceResult<List<CategoryViewModel>>> GetCategoriesAsync()
     {
@@ -58,9 +61,9 @@ public class CatalogService(ICatalogRefitService catalogRefitService, ILogger<Ca
     }
 
 
-    public async Task<ServiceResult<List<CourseViewModel>>> GetCoursesByUserId(Guid userId)
+    public async Task<ServiceResult<List<CourseViewModel>>> GetCoursesByUserId()
     {
-        var course = await catalogRefitService.GetCoursesByUserId(userId);
+        var course = await catalogRefitService.GetCoursesByUserId(userService.UserId);
 
         if (!course.IsSuccessStatusCode)
         {
