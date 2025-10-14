@@ -1,0 +1,116 @@
+﻿@page
+@model CreateModel
+@{
+}
+
+<form method="post">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Order information</h2>
+                <div class="card mb-3">
+
+                    <div class="card-body">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-warning text-bg-warning   border-warning"></div>
+                        <h3>Address Information</h3>
+                        <div class="mb-3">
+                            <label asp-for="CreateOrderViewModel.Address.Province" class="form-label"></label>
+                            <input class="form-control" asp-for="CreateOrderViewModel.Address.Province" value="istanbul">
+                            <span asp-validation-for="CreateOrderViewModel.Address.Province" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="CreateOrderViewModel.Address.District" class="form-label"></label>
+                            <input class="form-control" asp-for="CreateOrderViewModel.Address.District" value="Maltepe">
+                            <span asp-validation-for="CreateOrderViewModel.Address.District" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="CreateOrderViewModel.Address.Street" class="form-label"></label>
+                            <input class="form-control" asp-for="CreateOrderViewModel.Address.Street" value="x cad. y mah.">
+                            <span asp-validation-for="CreateOrderViewModel.Address.Street" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="CreateOrderViewModel.Address.Line" class="form-label"></label>
+                            <input class="form-control" asp-for="CreateOrderViewModel.Address.Line" value="x cad. y mah.">
+                            <span asp-validation-for="CreateOrderViewModel.Address.Line" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="CreateOrderViewModel.Address.ZipCode" class="form-label"></label>
+                            <input class="form-control" asp-for="CreateOrderViewModel.Address.ZipCode" value="12345">
+                            <span asp-validation-for="CreateOrderViewModel.Address.ZipCode" class="text-danger"></span>
+                        </div>
+
+
+                        <h3>Payment Information</h3>
+                        <div class="mb-3">
+                            <label asp-for="CreateOrderViewModel.Payment.CardHolderName" class="form-label"></label>
+                            <input class="form-control" asp-for="CreateOrderViewModel.Payment.CardHolderName" value="ahmet yıldız">
+                            <span asp-validation-for="CreateOrderViewModel.Payment.CardHolderName" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="CreateOrderViewModel.Payment.CardNumber" class="form-label"></label>
+                            <input class="form-control" asp-for="CreateOrderViewModel.Payment.CardNumber" value="4111111111111111">
+                            <span asp-validation-for="CreateOrderViewModel.Payment.CardNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="CreateOrderViewModel.Payment.Cvv" class="form-label"></label>
+                            <input class="form-control" asp-for="CreateOrderViewModel.Payment.Cvv" value="123">
+                            <span asp-validation-for="CreateOrderViewModel.Payment.Cvv" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="CreateOrderViewModel.Payment.ExpiryDate" class="form-label"></label>
+                            <input class="form-control" asp-for="CreateOrderViewModel.Payment.ExpiryDate" value="05/22">
+                            <span asp-validation-for="CreateOrderViewModel.Payment.ExpiryDate" class="text-danger"></span>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+            <div class="col-md-6">
+                <h2>Order Items</h2>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Course Name</th>
+                                <th>Price</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var item in Model.CreateOrderViewModel.OrderItems)
+                            {
+                                <tr>
+                                    <td>@item.ProductName</td>
+                                    <td>@item.UnitPrice</td>
+
+                                </tr>
+                            }
+                            </tbody>
+                            <tfoot>
+                            <tr class="table-info">
+                                <td>
+                                    <strong>Total Price:</strong>
+                                </td>
+                                <td>
+                                    <strong>@Model.CreateOrderViewModel.TotalPrice.ToString("C")</strong>
+                                </td>
+
+
+                            </tr>
+                            </tfoot>
+                        </table>
+
+                        <button type="submit" class="btn btn-primary">Complete payment</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
