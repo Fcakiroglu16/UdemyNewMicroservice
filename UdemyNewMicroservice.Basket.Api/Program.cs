@@ -1,7 +1,10 @@
+#region
+
 using UdemyNewMicroservice.Basket.Api;
 using UdemyNewMicroservice.Basket.Api.Features.Baskets;
-using UdemyNewMicroservice.Bus;
 using UdemyNewMicroservice.Shared.Extensions;
+
+#endregion
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +23,9 @@ builder.Services.AddVersioningExt();
 
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
 var app = builder.Build();
+
+app.UseExceptionHandler(x => { });
+
 app.AddBasketGroupEndpointExt(app.AddVersionSetExt());
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
