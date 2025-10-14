@@ -2,7 +2,6 @@
 
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Refit;
-using UdemyNewMicroservice.Web;
 using UdemyNewMicroservice.Web.DelegateHandlers;
 using UdemyNewMicroservice.Web.ExceptionHandlers;
 using UdemyNewMicroservice.Web.Extensions;
@@ -27,6 +26,7 @@ builder.Services.AddHttpClient<SignInService>();
 builder.Services.AddScoped<TokenService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<CatalogService>();
+builder.Services.AddScoped<BasketService>();
 builder.Services.AddScoped<UserService>();
 
 builder.Services.AddScoped<AuthenticatedHttpClientHandler>();
@@ -37,6 +37,22 @@ builder.Services.AddRefitClient<ICatalogRefitService>().ConfigureHttpClient(conf
     {
         var microserviceOption = builder.Configuration.GetSection(nameof(MicroserviceOption)).Get<MicroserviceOption>();
         configure.BaseAddress = new Uri(microserviceOption!.Catalog.BaseAddress);
+    }).AddHttpMessageHandler<AuthenticatedHttpClientHandler>()
+    .AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
+
+
+builder.Services.AddRefitClient<IBasketRefitService>().ConfigureHttpClient(configure =>
+    {
+        var microserviceOption = builder.Configuration.GetSection(nameof(MicroserviceOption)).Get<MicroserviceOption>();
+        configure.BaseAddress = new Uri(microserviceOption!.Basket.BaseAddress);
+    }).AddHttpMessageHandler<AuthenticatedHttpClientHandler>()
+    .AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
+
+
+builder.Services.AddRefitClient<IDiscountRefitService>().ConfigureHttpClient(configure =>
+    {
+        var microserviceOption = builder.Configuration.GetSection(nameof(MicroserviceOption)).Get<MicroserviceOption>();
+        configure.BaseAddress = new Uri(microserviceOption!.Discount.BaseAddress);
     }).AddHttpMessageHandler<AuthenticatedHttpClientHandler>()
     .AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
 

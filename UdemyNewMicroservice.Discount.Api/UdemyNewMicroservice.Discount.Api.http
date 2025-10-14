@@ -6,7 +6,7 @@ Content-Type: application/json
 {
   "code": "ABC123DEF2",
   "rate": 0.5,
-  "userId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "userId": "6c767756-b86e-4f40-9be7-d2317216bf91",
   "expired": "2025-05-19T23:01:14.126Z"
 }
 ###

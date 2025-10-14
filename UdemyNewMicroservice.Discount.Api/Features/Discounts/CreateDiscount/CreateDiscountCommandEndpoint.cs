@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿#region
+
+using Microsoft.AspNetCore.Mvc;
 using UdemyNewMicroservice.Shared.Filters;
+
+#endregion
 
 namespace UdemyNewMicroservice.Discount.Api.Features.Discounts.CreateDiscount;
 
@@ -15,7 +19,7 @@ public static class CreateDiscountCommandEndpoint
             .Produces<Guid>(StatusCodes.Status201Created)
             .Produces<ProblemDetails>(StatusCodes.Status400BadRequest)
             .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError)
-            .AddEndpointFilter<ValidationFilter<CreateDiscountCommand>>();
+            .AddEndpointFilter<ValidationFilter<CreateDiscountCommand>>().AllowAnonymous();
 
         return group;
     }

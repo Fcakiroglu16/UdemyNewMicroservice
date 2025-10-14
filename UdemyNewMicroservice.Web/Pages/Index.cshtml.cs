@@ -2,6 +2,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 using UdemyNewMicroservice.Web.PageModels;
+using UdemyNewMicroservice.Web.Services;
 using UdemyNewMicroservice.Web.ViewModel;
 
 #endregion

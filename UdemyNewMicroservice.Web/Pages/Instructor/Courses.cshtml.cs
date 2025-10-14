@@ -2,7 +2,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using UdemyNewMicroservice.Web;
+using UdemyNewMicroservice.Web.Services;
 using UdemyNewMicroservice.Web.ViewModel;
 
 #endregion

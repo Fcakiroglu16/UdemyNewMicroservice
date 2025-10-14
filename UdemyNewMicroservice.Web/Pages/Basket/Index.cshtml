@@ -1,0 +1,96 @@
+﻿@page
+@model IndexModel
+@{
+    var index = 1;
+}
+
+<table class="table table-striped">
+    <thead class="table-dark">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Course Picture</th>
+        <th scope="col">Course Name</th>
+        <th scope="col">Course Price</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    @if (!Model.Basket.HasItem)
+    {
+        <tr>
+            <td colspan="5" class="text-center">No items in the basket.</td>
+        </tr>
+    }
+
+
+    @foreach (var basketItem in Model.Basket.Items)
+    {
+        <tr>
+            <td>@index</td>
+            <td>
+                <course-thumbnail-picture class="img-fluid img-thumbnail" src="@basketItem.PictureUrl" width="100px"></course-thumbnail-picture>
+
+
+            </td>
+
+            <td>
+                @basketItem.Name
+            </td>
+            <td>
+
+
+                @if (Model.Basket.IsApplyDiscountCoupon)
+                {
+                    <span class="fw-bold">@basketItem.PriceWithDiscountRate!.Value.ToString("C")</span>
+                    <span style="text-decoration: line-through;">
+                        <text>(@basketItem.Price.ToString("C"))</text>
+                    </span>
+                }
+                else
+                {
+                    @basketItem.Price.ToString("C")
+                }
+
+            </td>
+
+            <td>
+
+                <a asp-page-handler="Delete" asp-route-courseId="@basketItem.Id" class="btn btn-danger">Remove</a>
+            </td>
+        </tr>
+        index++;
+    }
+    <tr class="table-active">
+        <td colspan="4" class="text-end fw-bold">Total Price:</td>
+        <td>@Model.Basket.GetTotalPrice().ToString("C")</td>
+    </tr>
+
+    </tbody>
+</table>
+
+
+@if (!Model.Basket.HasItem)
+{
+    return;
+}
+
+@if (Model.Basket.IsApplyDiscountCoupon)
+{
+    <div class="alert alert-success d-flex justify-content-between" role="alert">
+        <span>Discount coupon applied successfully.</span>
+        <a asp-page-handler="RemoveDiscount" class="btn btn-warning btn-sm">Remove Coupon (@Model.Basket.Coupon)</a>
+    </div>
+}
+
+
+<form method="post" asp-page-handler="ApplyDiscount">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" id="couponCode" name="CouponCode" placeholder="Coupon Code" required>
+        <button type="submit" class="btn btn-primary">Apply Coupon</button>
+    </div>
+</form>
+
+<a asp-page="/order/Create" class="btn btn-success w-100 mt-3 text-center">
+    <i class="fa-solid fa-credit-card"></i> Proceed to Payment Step
+</a>

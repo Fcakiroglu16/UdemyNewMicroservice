@@ -1,16 +1,15 @@
 ﻿#region
 
-using System.Text.Json;
 using Refit;
+using System.Text.Json;
 using UdemyNewMicroservice.Web.Extensions;
-using UdemyNewMicroservice.Web.Services;
 using UdemyNewMicroservice.Web.Services.Refit;
 using UdemyNewMicroservice.Web.ViewModel;
 using ProblemDetails = Microsoft.AspNetCore.Mvc.ProblemDetails;
 
 #endregion
 
-namespace UdemyNewMicroservice.Web;
+namespace UdemyNewMicroservice.Web.Services;
 
 public class CatalogService(
     ICatalogRefitService catalogRefitService,
