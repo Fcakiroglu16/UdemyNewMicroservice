@@ -19,7 +19,6 @@ public class GetBasketQueryHandler(
     public async Task<ServiceResult<BasketDto>> Handle(GetBasketQuery request,
         CancellationToken cancellationToken)
     {
-        throw new Exception("eeee");
         var basketAsString = await basketService.GetBasketFromCache(cancellationToken);
 
         if (string.IsNullOrEmpty(basketAsString))
