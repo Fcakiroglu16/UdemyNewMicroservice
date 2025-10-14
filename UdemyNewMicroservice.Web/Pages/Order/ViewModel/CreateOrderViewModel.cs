@@ -1,7 +1,7 @@
 ﻿#region
 
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using UdemyNewMicroservice.Web.Pages.Basket.Dto;
+using UdemyNewMicroservice.Web.Pages.Basket.ViewModel;
 
 #endregion
 
@@ -28,7 +28,7 @@ public record CreateOrderViewModel
     };
 
 
-    public void AddOrderItem(BasketItemDto basketItem)
+    public void AddOrderItem(BasketItemViewModel basketItem)
     {
         OrderItems.Add(new OrderItemViewModel(basketItem.Id, basketItem.Name,
             basketItem.Price));

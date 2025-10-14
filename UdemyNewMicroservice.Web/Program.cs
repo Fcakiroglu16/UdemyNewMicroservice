@@ -1,6 +1,7 @@
 #region
 
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.DataProtection;
 using Refit;
 using UdemyNewMicroservice.Web.DelegateHandlers;
 using UdemyNewMicroservice.Web.ExceptionHandlers;
@@ -14,6 +15,12 @@ using UdemyNewMicroservice.Web.Services.Refit;
 #endregion
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddDataProtection()
+    .PersistKeysToFileSystem(Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "keys")))
+    .SetApplicationName("UdemyNewMicroserviceWebProtectionKeys").SetDefaultKeyLifetime(TimeSpan.FromDays(60));
+
 
 // Add services to the container.
 builder.Services.AddRazorPages();

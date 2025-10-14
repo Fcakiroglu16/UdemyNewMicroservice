@@ -1,9 +1,8 @@
 ﻿#region
 
-using System.Net;
+using Refit;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Refit;
 using ProblemDetails = Microsoft.AspNetCore.Mvc.ProblemDetails;
 
 #endregion
@@ -114,7 +113,7 @@ public class ServiceResult<T> : ServiceResult
     }
 
 
-    public static ServiceResult<T> Error(ProblemDetails problemDetails, HttpStatusCode status)
+    public new static ServiceResult<T> Error(ProblemDetails problemDetails)
     {
         return new ServiceResult<T>
         {

@@ -24,6 +24,6 @@ public interface IBasketRefitService
     Task<ApiResponse<object>> RemoveDiscountRateAsync();
 
 
-    [Delete("/api/v1/basket/{courseId}")]
+    [Delete("/api/v1/baskets/item/{courseId}")]
     Task<ApiResponse<object>> DeleteItemAsync(Guid courseId);
 }

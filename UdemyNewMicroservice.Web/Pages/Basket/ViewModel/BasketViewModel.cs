@@ -1,36 +1,15 @@
 ﻿namespace UdemyNewMicroservice.Web.Pages.Basket.ViewModel;
 
-public record BasketViewModel
+public record BasketViewModel(
+    float? DiscountRate,
+    string? Coupon,
+    decimal TotalPrice,
+    decimal? TotalPriceWithAppliedDiscount,
+    List<BasketItemViewModel> Items
+)
 {
-    public List<BasketViewModelItem> Items { get; set; } = [];
-
-    private decimal TotalPrice { get; set; }
-
-    private decimal? TotalPriceByDiscountRate { get; set; }
-    public string? Coupon { get; set; }
-    public float? DiscountRate { get; set; }
-
-    public bool IsApplyDiscountCoupon => DiscountRate is > 0 && !string.IsNullOrEmpty(Coupon);
-
-    public bool HasItem => Items.Count > 0;
-
-
-    public decimal GetTotalPrice()
+    public static BasketViewModel Empty()
     {
-        return IsApplyDiscountCoupon ? TotalPriceByDiscountRate!.Value : TotalPrice;
-    }
-
-
-    public void SetPrice(decimal totalPrice, decimal? totalPriceByDiscountRate)
-    {
-        TotalPrice = totalPrice;
-        TotalPriceByDiscountRate = totalPriceByDiscountRate;
+        return new BasketViewModel(0, string.Empty, 0, 0, []);
     }
 }
-
-public record BasketViewModelItem(
-    Guid Id,
-    string? PictureUrl,
-    string Name,
-    decimal Price,
-    decimal? PriceWithDiscountRate);
