@@ -1,7 +1,6 @@
-﻿namespace UdemyNewMicroservice.Shared.Options
+﻿namespace UdemyNewMicroservice.Shared.Options;
+
+public class AddressUrlOption
 {
-    public class AddressUrlOption
-    {
-        public required string PaymentUrl { get; set; }
-    }
+    public required string PaymentUrl { get; set; }
 }

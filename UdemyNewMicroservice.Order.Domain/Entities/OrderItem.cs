@@ -13,9 +13,11 @@ public class OrderItem : BaseEntity<int>
 
     public void SetItem(Guid productId, string productName, decimal unitPrice)
     {
-        if (string.IsNullOrEmpty(productName)) throw new ArgumentNullException(nameof(productName), "ProductName cannot be empty");
+        if (string.IsNullOrEmpty(productName))
+            throw new ArgumentNullException(nameof(productName), "ProductName cannot be empty");
 
-        if (unitPrice <= 0) throw new ArgumentNullException(nameof(unitPrice), "UnitPrice cannot be less than or equal to zero");
+        if (unitPrice <= 0)
+            throw new ArgumentNullException(nameof(unitPrice), "UnitPrice cannot be less than or equal to zero");
 
 
         ProductId = productId;
@@ -31,7 +33,8 @@ public class OrderItem : BaseEntity<int>
 
     public void ApplyDiscount(float discountPercentage)
     {
-        if (discountPercentage < 0 || discountPercentage > 100) throw new ArgumentNullException("Discount percentage must be between 0 and 100");
+        if (discountPercentage < 0 || discountPercentage > 100)
+            throw new ArgumentNullException("Discount percentage must be between 0 and 100");
         UnitPrice -= UnitPrice * (decimal)discountPercentage / 100;
     }
 

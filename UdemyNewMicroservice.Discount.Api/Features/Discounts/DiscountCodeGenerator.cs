@@ -1,23 +1,26 @@
-﻿using System.Security.Cryptography;
+﻿#region
 
-namespace UdemyNewMicroservice.Discount.Api.Features.Discounts
+using System.Security.Cryptography;
+
+#endregion
+
+namespace UdemyNewMicroservice.Discount.Api.Features.Discounts;
+
+public class DiscountCodeGenerator
 {
-    public class DiscountCodeGenerator
+    private const string Allowed = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    public static string Generate(int length = 10)
     {
-        private const string Allowed = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        if (length <= 0) throw new ArgumentOutOfRangeException(nameof(length));
 
-        public static string Generate(int length = 10)
+        var buffer = new char[length];
+        for (var i = 0; i < length; i++)
         {
-            if (length <= 0) throw new ArgumentOutOfRangeException(nameof(length));
-
-            char[] buffer = new char[length];
-            for (int i = 0; i < length; i++)
-            {
-                int idx = RandomNumberGenerator.GetInt32(Allowed.Length); // uniform, bias yok
-                buffer[i] = Allowed[idx];
-            }
-
-            return new string(buffer);
+            var idx = RandomNumberGenerator.GetInt32(Allowed.Length); // uniform, bias yok
+            buffer[i] = Allowed[idx];
         }
+
+        return new string(buffer);
     }
 }

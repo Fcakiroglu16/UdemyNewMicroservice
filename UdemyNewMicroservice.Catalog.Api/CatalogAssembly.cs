@@ -1,4 +1,3 @@
-﻿namespace UdemyNewMicroservice.Catalog.Api
-{
-    public struct CatalogAssembly;
-}
+﻿namespace UdemyNewMicroservice.Catalog.Api;
+
+public struct CatalogAssembly;

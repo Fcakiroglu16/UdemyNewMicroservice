@@ -1,9 +1,9 @@
 ﻿#region
 
-using AutoMapper;
-using MediatR;
 using System.Net;
 using System.Text.Json;
+using AutoMapper;
+using MediatR;
 using UdemyNewMicroservice.Basket.Api.Dto;
 using UdemyNewMicroservice.Shared;
 

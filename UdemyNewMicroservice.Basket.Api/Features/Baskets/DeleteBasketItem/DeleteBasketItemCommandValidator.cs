@@ -1,12 +1,15 @@
-﻿using FluentValidation;
+﻿#region
 
-namespace UdemyNewMicroservice.Basket.Api.Features.Baskets.DeleteBasketItem
+using FluentValidation;
+
+#endregion
+
+namespace UdemyNewMicroservice.Basket.Api.Features.Baskets.DeleteBasketItem;
+
+public class DeleteBasketItemCommandValidator : AbstractValidator<DeleteBasketItemCommand>
 {
-    public class DeleteBasketItemCommandValidator : AbstractValidator<DeleteBasketItemCommand>
+    public DeleteBasketItemCommandValidator()
     {
-        public DeleteBasketItemCommandValidator()
-        {
-            RuleFor(x => x.Id).NotEmpty().WithMessage("CourseId is required");
-        }
+        RuleFor(x => x.Id).NotEmpty().WithMessage("CourseId is required");
     }
 }

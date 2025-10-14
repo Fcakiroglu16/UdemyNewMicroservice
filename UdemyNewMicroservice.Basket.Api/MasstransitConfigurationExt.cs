@@ -1,40 +1,43 @@
-﻿using MassTransit;
+﻿#region
+
+using MassTransit;
 using UdemyNewMicroservice.Basket.Api.Consumers;
 using UdemyNewMicroservice.Bus;
 
-namespace UdemyNewMicroservice.Basket.Api
+#endregion
+
+namespace UdemyNewMicroservice.Basket.Api;
+
+public static class MasstransitConfigurationExt
 {
-    public static class MasstransitConfigurationExt
+    public static IServiceCollection AddMasstransitExt(this IServiceCollection services,
+        IConfiguration configuration)
     {
-        public static IServiceCollection AddMasstransitExt(this IServiceCollection services,
-            IConfiguration configuration)
+        var busOptions = configuration.GetSection(nameof(BusOption)).Get<BusOption>()!;
+
+
+        services.AddMassTransit(configure =>
         {
-            var busOptions = configuration.GetSection(nameof(BusOption)).Get<BusOption>()!;
+            configure.AddConsumer<OrderCreatedEventConsumer>();
 
 
-            services.AddMassTransit(configure =>
+            configure.UsingRabbitMq((ctx, cfg) =>
             {
-                configure.AddConsumer<OrderCreatedEventConsumer>();
-
-
-                configure.UsingRabbitMq((ctx, cfg) =>
+                cfg.Host(new Uri($"rabbitmq://{busOptions.Address}:{busOptions.Port}"), host =>
                 {
-                    cfg.Host(new Uri($"rabbitmq://{busOptions.Address}:{busOptions.Port}"), host =>
-                    {
-                        host.Username(busOptions.UserName);
-                        host.Password(busOptions.Password);
-                    });
-
-                    cfg.ReceiveEndpoint("basket-microservice.order-created.queue",
-                        e => { e.ConfigureConsumer<OrderCreatedEventConsumer>(ctx); });
-
-
-                    // cfg.ConfigureEndpoints(ctx);
+                    host.Username(busOptions.UserName);
+                    host.Password(busOptions.Password);
                 });
+
+                cfg.ReceiveEndpoint("basket-microservice.order-created.queue",
+                    e => { e.ConfigureConsumer<OrderCreatedEventConsumer>(ctx); });
+
+
+                // cfg.ConfigureEndpoints(ctx);
             });
+        });
 
 
-            return services;
-        }
+        return services;
     }
 }

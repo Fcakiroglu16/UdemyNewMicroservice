@@ -1,7 +1,7 @@
 ﻿#region
 
-using Refit;
 using System.Text.Json;
+using Refit;
 using UdemyNewMicroservice.Web.Extensions;
 using UdemyNewMicroservice.Web.Services.Refit;
 using UdemyNewMicroservice.Web.ViewModel;

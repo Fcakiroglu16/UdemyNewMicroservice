@@ -1,12 +1,17 @@
-﻿using MassTransit;
-using MediatR;
+﻿#region
+
 using System.Net;
+using MassTransit;
+using MediatR;
+using UdemyNewMicroservice.Bus.Events;
 using UdemyNewMicroservice.Order.Application.Contracts.Refit.PaymentService;
 using UdemyNewMicroservice.Order.Application.Contracts.Repositories;
 using UdemyNewMicroservice.Order.Application.Contracts.UnitOfWork;
 using UdemyNewMicroservice.Order.Domain.Entities;
 using UdemyNewMicroservice.Shared;
 using UdemyNewMicroservice.Shared.Services;
+
+#endregion
 
 namespace UdemyNewMicroservice.Order.Application.UseCases.Orders.CreateOrder;
 
@@ -48,12 +53,12 @@ public class CreateOrderCommandHandler(
         await unitOfWork.CommitAsync(cancellationToken);
 
 
-        CreatePaymentRequest paymentRequest = new CreatePaymentRequest(order.Code, request.Payment.CardNumber,
+        var paymentRequest = new CreatePaymentRequest(order.Code, request.Payment.CardNumber,
             request.Payment.CardHolderName, request.Payment.Expiration, request.Payment.Cvc, order.TotalPrice);
         var paymentResponse = await paymentService.CreateAsync(paymentRequest);
 
 
-        if (paymentResponse.Status == false)
+        if (!paymentResponse.Status)
             return ServiceResult.Error(paymentResponse.ErrorMessage!, HttpStatusCode.InternalServerError);
 
 
@@ -63,7 +68,7 @@ public class CreateOrderCommandHandler(
         await unitOfWork.CommitAsync(cancellationToken);
 
 
-        await publishEndpoint.Publish(new Bus.Events.OrderCreatedEvent(order.Id, identityService.UserId),
+        await publishEndpoint.Publish(new OrderCreatedEvent(order.Id, identityService.UserId),
             cancellationToken);
         return ServiceResult.SuccessAsNoContent();
     }

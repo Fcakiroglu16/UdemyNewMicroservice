@@ -3,6 +3,6 @@
 public enum OrderStatus
 {
     WaitingForPayment = 1,
-    Paid=2,
-    Cancel=3,
+    Paid = 2,
+    Cancel = 3
 }

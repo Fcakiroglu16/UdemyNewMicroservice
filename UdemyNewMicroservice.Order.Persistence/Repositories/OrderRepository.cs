@@ -1,6 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿#region
+
+using Microsoft.EntityFrameworkCore;
 using UdemyNewMicroservice.Order.Application.Contracts.Repositories;
 using UdemyNewMicroservice.Order.Domain.Entities;
+
+#endregion
 
 namespace UdemyNewMicroservice.Order.Persistence.Repositories;
 

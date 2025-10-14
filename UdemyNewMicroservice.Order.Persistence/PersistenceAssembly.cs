@@ -1,6 +1,3 @@
-﻿
-
-namespace UdemyNewMicroservice.Order.Persistence;
+﻿namespace UdemyNewMicroservice.Order.Persistence;
 
 public struct PersistenceAssembly;
-

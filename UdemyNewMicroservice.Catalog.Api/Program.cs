@@ -1,7 +1,11 @@
+#region
+
 using UdemyNewMicroservice.Catalog.Api;
 using UdemyNewMicroservice.Catalog.Api.Features.Categories;
 using UdemyNewMicroservice.Catalog.Api.Features.Courses;
 using UdemyNewMicroservice.Catalog.Api.Options;
+
+#endregion
 
 var builder = WebApplication.CreateBuilder(args);
 

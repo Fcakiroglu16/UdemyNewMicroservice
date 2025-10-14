@@ -1,4 +1,3 @@
-﻿namespace UdemyNewMicroservice.Bus.Commands
-{
-    public record UploadCoursePictureCommand(Guid courseId, Byte[] picture, string FileName);
-}
+﻿namespace UdemyNewMicroservice.Bus.Commands;
+
+public record UploadCoursePictureCommand(Guid courseId, byte[] picture, string FileName);

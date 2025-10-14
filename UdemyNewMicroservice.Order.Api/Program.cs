@@ -1,3 +1,5 @@
+#region
+
 using Microsoft.EntityFrameworkCore;
 using UdemyNewMicroservice.Bus;
 using UdemyNewMicroservice.Order.Api.Endpoints.Orders;
@@ -10,6 +12,8 @@ using UdemyNewMicroservice.Order.Persistence;
 using UdemyNewMicroservice.Order.Persistence.Repositories;
 using UdemyNewMicroservice.Order.Persistence.UnitOfWork;
 using UdemyNewMicroservice.Shared.Extensions;
+
+#endregion
 
 var builder = WebApplication.CreateBuilder(args);
 

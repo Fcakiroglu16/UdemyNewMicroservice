@@ -1,21 +1,20 @@
 ﻿@page
-@model UdemyNewMicroservice.Web.Pages.Auth.SignUpModel
+@model SignUpModel
 @{
-
 }
 
 <div class="row justify-content-center mt-5">
 
     <div class="col-md-4">
         <h2 class="text-center">Sign Up</h2>
-        
-        <div asp-validation-summary="ModelOnly" >
+
+        <div asp-validation-summary="ModelOnly">
 
         </div>
         <form method="post">
             <div class="mb-3">
                 <label asp-for="SignUpViewModel.UserName" class="form-label"></label>
-                <input asp-for="SignUpViewModel.UserName" class="form-control" />
+                <input asp-for="SignUpViewModel.UserName" class="form-control"/>
                 <div class="text-danger">
                     <span asp-validation-for="SignUpViewModel.UserName"></span>
                 </div>
@@ -23,14 +22,14 @@
 
             <div class="mb-3">
                 <label asp-for="SignUpViewModel.FirstName" class="form-label"></label>
-                <input asp-for="SignUpViewModel.FirstName" class="form-control" />
+                <input asp-for="SignUpViewModel.FirstName" class="form-control"/>
                 <div class="text-danger">
                     <span asp-validation-for="SignUpViewModel.FirstName"></span>
                 </div>
             </div>
             <div class="mb-3">
                 <label asp-for="SignUpViewModel.LastName" class="form-label"></label>
-                <input asp-for="SignUpViewModel.LastName" class="form-control" />
+                <input asp-for="SignUpViewModel.LastName" class="form-control"/>
                 <div class="text-danger">
                     <span asp-validation-for="SignUpViewModel.LastName"></span>
                 </div>
@@ -38,21 +37,21 @@
 
             <div class="mb-3">
                 <label asp-for="SignUpViewModel.Email" class="form-label"></label>
-                <input asp-for="SignUpViewModel.Email" class="form-control" />
+                <input asp-for="SignUpViewModel.Email" class="form-control"/>
                 <div class="text-danger">
                     <span asp-validation-for="SignUpViewModel.Email"></span>
                 </div>
             </div>
             <div class="mb-3">
                 <label asp-for="SignUpViewModel.Password" class="form-label"></label>
-                <input asp-for="SignUpViewModel.Password" type="password" class="form-control" />
+                <input asp-for="SignUpViewModel.Password" type="password" class="form-control"/>
                 <div class="text-danger">
                     <span asp-validation-for="SignUpViewModel.Password"></span>
                 </div>
             </div>
             <div class="mb-3">
                 <label asp-for="SignUpViewModel.PasswordConfirm" class="form-label"></label>
-                <input asp-for="SignUpViewModel.PasswordConfirm" type="password" class="form-control" />
+                <input asp-for="SignUpViewModel.PasswordConfirm" type="password" class="form-control"/>
                 <div class="text-danger">
                     <span asp-validation-for="SignUpViewModel.PasswordConfirm"></span>
                 </div>
@@ -64,5 +63,5 @@
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial"/>
 }

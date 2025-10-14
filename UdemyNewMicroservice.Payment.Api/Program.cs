@@ -1,9 +1,13 @@
+#region
+
 using Microsoft.EntityFrameworkCore;
 using UdemyNewMicroservice.Bus;
 using UdemyNewMicroservice.Payment.Api;
 using UdemyNewMicroservice.Payment.Api.Feature.Payments;
 using UdemyNewMicroservice.Payment.Api.Repositories;
 using UdemyNewMicroservice.Shared.Extensions;
+
+#endregion
 
 var builder = WebApplication.CreateBuilder(args);
 

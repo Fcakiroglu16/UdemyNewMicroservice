@@ -1,9 +1,12 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿#region
 
-namespace UdemyNewMicroservice.Catalog.Api.Repositories
+using MongoDB.Bson.Serialization.Attributes;
+
+#endregion
+
+namespace UdemyNewMicroservice.Catalog.Api.Repositories;
+
+public class BaseEntity
 {
-    public class BaseEntity
-    {
-        [BsonElement("_id")] public Guid Id { get; set; }
-    }
+    [BsonElement("_id")] public Guid Id { get; set; }
 }

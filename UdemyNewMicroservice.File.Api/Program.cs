@@ -1,9 +1,12 @@
+#region
+
 using Microsoft.Extensions.FileProviders;
-using UdemyNewMicroservice.Bus;
 using UdemyNewMicroservice.Discount.Api;
 using UdemyNewMicroservice.File.Api;
 using UdemyNewMicroservice.File.Api.Features.File;
 using UdemyNewMicroservice.Shared.Extensions;
+
+#endregion
 
 var builder = WebApplication.CreateBuilder(args);
 

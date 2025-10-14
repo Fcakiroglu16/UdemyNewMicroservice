@@ -1,7 +1,11 @@
+#region
+
 using UdemyNewMicroservice.Discount.Api;
 using UdemyNewMicroservice.Discount.Api.Features.Discounts;
 using UdemyNewMicroservice.Discount.Api.Options;
 using UdemyNewMicroservice.Discount.Api.Repositories;
+
+#endregion
 
 var builder = WebApplication.CreateBuilder(args);
 

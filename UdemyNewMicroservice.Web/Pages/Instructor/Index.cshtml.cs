@@ -1,12 +1,14 @@
-using Microsoft.AspNetCore.Mvc;
+#region
+
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace UdemyNewMicroservice.Web.Pages.Instructor
+#endregion
+
+namespace UdemyNewMicroservice.Web.Pages.Instructor;
+
+public class IndexModel : PageModel
 {
-    public class IndexModel : PageModel
+    public void OnGet()
     {
-        public void OnGet()
-        {
-        }
     }
 }

@@ -1,10 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿#region
 
-namespace UdemyNewMicroservice.Catalog.Api.Options
+using System.ComponentModel.DataAnnotations;
+
+#endregion
+
+namespace UdemyNewMicroservice.Catalog.Api.Options;
+
+public class MongoOption
 {
-    public class MongoOption
-    {
-        [Required] public string DatabaseName { get; set; } = default!;
-        [Required] public string ConnectionString { get; set; } = default!;
-    }
+    [Required] public string DatabaseName { get; set; } = default!;
+    [Required] public string ConnectionString { get; set; } = default!;
 }

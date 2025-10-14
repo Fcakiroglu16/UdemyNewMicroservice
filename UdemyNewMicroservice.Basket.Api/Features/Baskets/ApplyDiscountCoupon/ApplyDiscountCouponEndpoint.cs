@@ -1,6 +1,10 @@
-﻿using MediatR;
+﻿#region
+
+using MediatR;
 using UdemyNewMicroservice.Shared.Extensions;
 using UdemyNewMicroservice.Shared.Filters;
+
+#endregion
 
 namespace UdemyNewMicroservice.Basket.Api.Features.Baskets.ApplyDiscountCoupon;
 

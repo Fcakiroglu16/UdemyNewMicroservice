@@ -1,15 +1,18 @@
-﻿using AutoMapper;
+﻿#region
+
+using AutoMapper;
 using UdemyNewMicroservice.Basket.Api.Data;
 using UdemyNewMicroservice.Basket.Api.Dto;
 
-namespace UdemyNewMicroservice.Basket.Api.Features.Baskets
+#endregion
+
+namespace UdemyNewMicroservice.Basket.Api.Features.Baskets;
+
+public class BasketMapping : Profile
 {
-    public class BasketMapping : Profile
+    public BasketMapping()
     {
-        public BasketMapping()
-        {
-            CreateMap<BasketDto, Data.Basket>().ReverseMap();
-            CreateMap<BasketItemDto, BasketItem>().ReverseMap();
-        }
+        CreateMap<BasketDto, Data.Basket>().ReverseMap();
+        CreateMap<BasketItemDto, BasketItem>().ReverseMap();
     }
 }

@@ -1,27 +1,30 @@
-﻿using System.Reflection;
+﻿#region
+
+using System.Reflection;
 using MongoDB.Driver;
 
-namespace UdemyNewMicroservice.Discount.Api.Repositories
+#endregion
+
+namespace UdemyNewMicroservice.Discount.Api.Repositories;
+
+public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
-    public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
+    public DbSet<Discount> Discounts { get; set; } = null!;
+
+
+    public static AppDbContext Create(IMongoDatabase database)
     {
-        public DbSet<Discount> Discounts { get; set; } = null!;
+        var optionsBuilder =
+            new DbContextOptionsBuilder<AppDbContext>().UseMongoDB(database.Client,
+                database.DatabaseNamespace.DatabaseName);
 
 
-        public static AppDbContext Create(IMongoDatabase database)
-        {
-            var optionsBuilder =
-                new DbContextOptionsBuilder<AppDbContext>().UseMongoDB(database.Client,
-                    database.DatabaseNamespace.DatabaseName);
+        return new AppDbContext(optionsBuilder.Options);
+    }
 
 
-            return new AppDbContext(optionsBuilder.Options);
-        }
-
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-        }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
 }

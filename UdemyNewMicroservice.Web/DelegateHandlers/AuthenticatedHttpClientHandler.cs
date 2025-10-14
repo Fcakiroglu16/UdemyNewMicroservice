@@ -1,9 +1,9 @@
 ﻿#region
 
+using System.Net;
 using Duende.IdentityModel.Client;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using System.Net;
 using UdemyNewMicroservice.Web.Services;
 
 #endregion

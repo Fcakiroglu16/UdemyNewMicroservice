@@ -1,8 +1,8 @@
 ﻿#region
 
-using Refit;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Refit;
 using ProblemDetails = Microsoft.AspNetCore.Mvc.ProblemDetails;
 
 #endregion

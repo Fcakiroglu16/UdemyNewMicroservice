@@ -1,11 +1,10 @@
-﻿namespace UdemyNewMicroservice.Bus
-{
-    public class BusOption
-    {
-        public required string Address { get; set; }
-        public required string UserName { get; set; }
-        public required string Password { get; set; }
+﻿namespace UdemyNewMicroservice.Bus;
 
-        public required int Port { get; set; }
-    }
+public class BusOption
+{
+    public required string Address { get; set; }
+    public required string UserName { get; set; }
+    public required string Password { get; set; }
+
+    public required int Port { get; set; }
 }

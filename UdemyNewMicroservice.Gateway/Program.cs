@@ -1,4 +1,8 @@
+#region
+
 using UdemyNewMicroservice.Shared.Extensions;
+
+#endregion
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,12 +1,14 @@
-using Microsoft.AspNetCore.Mvc;
+#region
+
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace UdemyNewMicroservice.Web.Pages.Auth
+#endregion
+
+namespace UdemyNewMicroservice.Web.Pages.Auth;
+
+public class AccessDeniedModel : PageModel
 {
-    public class AccessDeniedModel : PageModel
+    public void OnGet()
     {
-        public void OnGet()
-        {
-        }
     }
 }

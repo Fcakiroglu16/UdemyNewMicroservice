@@ -1,7 +1,10 @@
-﻿using UdemyNewMicroservice.Shared;
+﻿#region
 
-namespace UdemyNewMicroservice.Basket.Api.Features.Baskets.AddBasketItem
-{
-    public record AddBasketItemCommand(Guid CourseId, string CourseName, decimal CoursePrice, string? ImageUrl)
-        : IRequestByServiceResult;
-}
+using UdemyNewMicroservice.Shared;
+
+#endregion
+
+namespace UdemyNewMicroservice.Basket.Api.Features.Baskets.AddBasketItem;
+
+public record AddBasketItemCommand(Guid CourseId, string CourseName, decimal CoursePrice, string? ImageUrl)
+    : IRequestByServiceResult;

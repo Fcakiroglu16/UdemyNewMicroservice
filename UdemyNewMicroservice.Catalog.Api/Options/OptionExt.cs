@@ -1,19 +1,22 @@
-﻿using Microsoft.Extensions.Options;
+﻿#region
 
-namespace UdemyNewMicroservice.Catalog.Api.Options
+using Microsoft.Extensions.Options;
+
+#endregion
+
+namespace UdemyNewMicroservice.Catalog.Api.Options;
+
+public static class OptionExt
 {
-    public static class OptionExt
+    public static IServiceCollection AddOptionsExt(this IServiceCollection services)
     {
-        public static IServiceCollection AddOptionsExt(this IServiceCollection services)
-        {
-            services.AddOptions<MongoOption>().BindConfiguration(nameof(MongoOption)).ValidateDataAnnotations()
-                .ValidateOnStart();
+        services.AddOptions<MongoOption>().BindConfiguration(nameof(MongoOption)).ValidateDataAnnotations()
+            .ValidateOnStart();
 
 
-            services.AddSingleton(sp => sp.GetRequiredService<IOptions<MongoOption>>().Value);
+        services.AddSingleton(sp => sp.GetRequiredService<IOptions<MongoOption>>().Value);
 
 
-            return services;
-        }
+        return services;
     }
 }

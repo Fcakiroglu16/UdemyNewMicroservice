@@ -1,7 +1,7 @@
 ﻿#region
 
-using Microsoft.AspNetCore.Http;
 using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Http;
 
 #endregion
 

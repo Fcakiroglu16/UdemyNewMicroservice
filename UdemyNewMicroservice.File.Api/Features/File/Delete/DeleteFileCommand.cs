@@ -1,6 +1,9 @@
-﻿using UdemyNewMicroservice.Shared;
+﻿#region
 
-namespace UdemyNewMicroservice.File.Api.Features.File.Delete
-{
-    public record DeleteFileCommand(string FileName) : IRequestByServiceResult;
-}
+using UdemyNewMicroservice.Shared;
+
+#endregion
+
+namespace UdemyNewMicroservice.File.Api.Features.File.Delete;
+
+public record DeleteFileCommand(string FileName) : IRequestByServiceResult;

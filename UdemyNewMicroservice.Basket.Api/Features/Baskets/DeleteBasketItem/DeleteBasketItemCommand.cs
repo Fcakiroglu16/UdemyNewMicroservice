@@ -1,6 +1,9 @@
-﻿using UdemyNewMicroservice.Shared;
+﻿#region
 
-namespace UdemyNewMicroservice.Basket.Api.Features.Baskets.DeleteBasketItem
-{
-    public record DeleteBasketItemCommand(Guid Id) : IRequestByServiceResult;
-}
+using UdemyNewMicroservice.Shared;
+
+#endregion
+
+namespace UdemyNewMicroservice.Basket.Api.Features.Baskets.DeleteBasketItem;
+
+public record DeleteBasketItemCommand(Guid Id) : IRequestByServiceResult;

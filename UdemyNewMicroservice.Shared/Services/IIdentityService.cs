@@ -1,10 +1,9 @@
-﻿namespace UdemyNewMicroservice.Shared.Services
-{
-    public interface IIdentityService
-    {
-        Guid UserId { get; }
-        string UserName { get; }
+﻿namespace UdemyNewMicroservice.Shared.Services;
 
-        List<string> Roles { get; }
-    }
+public interface IIdentityService
+{
+    Guid UserId { get; }
+    string UserName { get; }
+
+    List<string> Roles { get; }
 }

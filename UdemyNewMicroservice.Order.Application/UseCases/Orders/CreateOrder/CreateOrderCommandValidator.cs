@@ -1,4 +1,8 @@
-﻿using FluentValidation;
+﻿#region
+
+using FluentValidation;
+
+#endregion
 
 namespace UdemyNewMicroservice.Order.Application.UseCases.Orders.CreateOrder;
 

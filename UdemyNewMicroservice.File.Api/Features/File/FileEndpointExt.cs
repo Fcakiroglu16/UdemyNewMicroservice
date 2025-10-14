@@ -1,17 +1,18 @@
-﻿using Asp.Versioning.Builder;
+﻿#region
+
+using Asp.Versioning.Builder;
 using UdemyNewMicroservice.Discount.Api.Features.Discounts.CreateDiscount;
 using UdemyNewMicroservice.File.Api.Features.File.Delete;
 
+#endregion
 
-namespace UdemyNewMicroservice.File.Api.Features.File
+namespace UdemyNewMicroservice.File.Api.Features.File;
+
+public static class FileEndpointExt
 {
-
-    public static class FileEndpointExt
+    public static void AddFileGroupEndpointExt(this WebApplication app, ApiVersionSet apiVersionSet)
     {
-        public static void AddFileGroupEndpointExt(this WebApplication app, ApiVersionSet apiVersionSet)
-        {
-            app.MapGroup("api/v{version:apiVersion}/files").WithTags("files").WithApiVersionSet(apiVersionSet)
-                .UploadFileGroupItemEndpoint().DeleteFileGroupItemEndpoint().RequireAuthorization();
-        }
+        app.MapGroup("api/v{version:apiVersion}/files").WithTags("files").WithApiVersionSet(apiVersionSet)
+            .UploadFileGroupItemEndpoint().DeleteFileGroupItemEndpoint().RequireAuthorization();
     }
 }

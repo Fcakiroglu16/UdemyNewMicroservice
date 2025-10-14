@@ -1,4 +1,3 @@
-﻿namespace UdemyNewMicroservice.Basket.Api
-{
-    public struct BasketAssembly;
-}
+﻿namespace UdemyNewMicroservice.Basket.Api;
+
+public struct BasketAssembly;

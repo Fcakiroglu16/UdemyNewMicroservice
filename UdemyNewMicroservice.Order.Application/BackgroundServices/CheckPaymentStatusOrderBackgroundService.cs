@@ -1,40 +1,44 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿#region
+
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using UdemyNewMicroservice.Order.Application.Contracts.Refit.PaymentService;
 using UdemyNewMicroservice.Order.Application.Contracts.Repositories;
 using UdemyNewMicroservice.Order.Application.Contracts.UnitOfWork;
+using UdemyNewMicroservice.Order.Domain.Entities;
 
-namespace UdemyNewMicroservice.Order.Application.BackgroundServices
+#endregion
+
+namespace UdemyNewMicroservice.Order.Application.BackgroundServices;
+
+public class CheckPaymentStatusOrderBackgroundService(IServiceProvider serviceProvider) : BackgroundService
 {
-    public class CheckPaymentStatusOrderBackgroundService(IServiceProvider serviceProvider) : BackgroundService
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        using var scope = serviceProvider.CreateScope();
+
+        var paymentService = scope.ServiceProvider.GetRequiredService<IPaymentService>();
+        var orderRepository = scope.ServiceProvider.GetRequiredService<IOrderRepository>();
+        var unitOfWork = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
+
+        while (!stoppingToken.IsCancellationRequested)
         {
-            using var scope = serviceProvider.CreateScope();
+            var orders = orderRepository.Where(x => x.Status == OrderStatus.WaitingForPayment)
+                .ToList();
 
-            var paymentService = scope.ServiceProvider.GetRequiredService<IPaymentService>();
-            var orderRepository = scope.ServiceProvider.GetRequiredService<IOrderRepository>();
-            var unitOfWork = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
-
-            while (!stoppingToken.IsCancellationRequested)
+            foreach (var order in orders)
             {
-                var orders = orderRepository.Where(x => x.Status == Domain.Entities.OrderStatus.WaitingForPayment)
-                    .ToList();
+                var paymentStatusResponse = await paymentService.GetStatusAsync(order.Code);
 
-                foreach (var order in orders)
+                if (paymentStatusResponse.IsPaid!)
                 {
-                    var paymentStatusResponse = await paymentService.GetStatusAsync(order.Code);
-
-                    if (paymentStatusResponse.IsPaid!)
-                    {
-                        await orderRepository.SetStatus(order.Code, paymentStatusResponse.PaymentId!.Value,
-                            Domain.Entities.OrderStatus.Paid);
-                        await unitOfWork.CommitAsync(stoppingToken);
-                    }
+                    await orderRepository.SetStatus(order.Code, paymentStatusResponse.PaymentId!.Value,
+                        OrderStatus.Paid);
+                    await unitOfWork.CommitAsync(stoppingToken);
                 }
-
-                await Task.Delay(2000, stoppingToken);
             }
+
+            await Task.Delay(2000, stoppingToken);
         }
     }
 }

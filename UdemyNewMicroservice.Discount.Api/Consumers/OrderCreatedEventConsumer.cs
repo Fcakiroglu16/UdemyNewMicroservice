@@ -1,31 +1,34 @@
-﻿using UdemyNewMicroservice.Bus.Events;
+﻿#region
+
+using UdemyNewMicroservice.Bus.Events;
 using UdemyNewMicroservice.Discount.Api.Features.Discounts;
 using UdemyNewMicroservice.Discount.Api.Repositories;
 
-namespace UdemyNewMicroservice.Discount.Api.Consumers
+#endregion
+
+namespace UdemyNewMicroservice.Discount.Api.Consumers;
+
+public class OrderCreatedEventConsumer(IServiceProvider serviceProvider) : IConsumer<OrderCreatedEvent>
 {
-    public class OrderCreatedEventConsumer(IServiceProvider serviceProvider) : IConsumer<OrderCreatedEvent>
+    public async Task Consume(ConsumeContext<OrderCreatedEvent> context)
     {
-        public async Task Consume(ConsumeContext<OrderCreatedEvent> context)
+        using (var scope = serviceProvider.CreateScope())
         {
-            using (var scope = serviceProvider.CreateScope())
+            var appDbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+            var discount = new Repositories.Discount
             {
-                var appDbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                Id = NewId.NextSequentialGuid(),
+                Code = DiscountCodeGenerator.Generate(),
+                Created = DateTime.Now,
+                Rate = 0.1f,
+                Expired = DateTime.Now.AddMonths(1),
+                UserId = context.Message.UserId
+            };
 
-                var discount = new Repositories.Discount()
-                {
-                    Id = NewId.NextSequentialGuid(),
-                    Code = DiscountCodeGenerator.Generate(10),
-                    Created = DateTime.Now,
-                    Rate = 0.1f,
-                    Expired = DateTime.Now.AddMonths(1),
-                    UserId = context.Message.UserId
-                };
+            await appDbContext.Discounts.AddAsync(discount);
 
-                await appDbContext.Discounts.AddAsync(discount);
-
-                await appDbContext.SaveChangesAsync();
-            }
+            await appDbContext.SaveChangesAsync();
         }
     }
 }

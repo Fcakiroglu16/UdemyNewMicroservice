@@ -1,4 +1,8 @@
-﻿using System.Text;
+﻿#region
+
+using System.Text;
+
+#endregion
 
 namespace UdemyNewMicroservice.Order.Domain.Entities;
 

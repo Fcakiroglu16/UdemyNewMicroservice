@@ -1,42 +1,45 @@
-﻿using MassTransit;
+﻿#region
 
-namespace UdemyNewMicroservice.Payment.Api.Repositories
+using MassTransit;
+
+#endregion
+
+namespace UdemyNewMicroservice.Payment.Api.Repositories;
+
+public class Payment
 {
-    public class Payment
+    public Payment(Guid userId, string orderCode, decimal amount)
     {
-        public Guid Id { get; set; }
-        public Guid UserId { get; set; }
-        public string OrderCode { get; set; }
-        public DateTime Created { get; set; }
-        public decimal Amount { get; set; }
-        public PaymentStatus Status { get; set; }
-
-        public Payment(Guid userId, string orderCode, decimal amount)
-        {
-            Create(userId, orderCode, amount);
-        }
-
-
-        public void Create(Guid userId, string orderCode, decimal amount)
-        {
-            Id = NewId.NextSequentialGuid();
-            Created = DateTime.UtcNow;
-            UserId = userId;
-            OrderCode = orderCode;
-            Amount = amount;
-            Status = PaymentStatus.Pending;
-        }
-
-        public void SetStatus(PaymentStatus status)
-        {
-            Status = status;
-        }
+        Create(userId, orderCode, amount);
     }
 
-    public enum PaymentStatus
+    public Guid Id { get; set; }
+    public Guid UserId { get; set; }
+    public string OrderCode { get; set; }
+    public DateTime Created { get; set; }
+    public decimal Amount { get; set; }
+    public PaymentStatus Status { get; set; }
+
+
+    public void Create(Guid userId, string orderCode, decimal amount)
     {
-        Success = 1,
-        Failed = 2,
-        Pending = 3
+        Id = NewId.NextSequentialGuid();
+        Created = DateTime.UtcNow;
+        UserId = userId;
+        OrderCode = orderCode;
+        Amount = amount;
+        Status = PaymentStatus.Pending;
     }
+
+    public void SetStatus(PaymentStatus status)
+    {
+        Status = status;
+    }
+}
+
+public enum PaymentStatus
+{
+    Success = 1,
+    Failed = 2,
+    Pending = 3
 }

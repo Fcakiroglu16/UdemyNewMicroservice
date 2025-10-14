@@ -1,4 +1,8 @@
-﻿using UdemyNewMicroservice.Order.Domain.Entities;
+﻿#region
+
+using UdemyNewMicroservice.Order.Domain.Entities;
+
+#endregion
 
 namespace UdemyNewMicroservice.Order.Application.Contracts.Repositories;
 

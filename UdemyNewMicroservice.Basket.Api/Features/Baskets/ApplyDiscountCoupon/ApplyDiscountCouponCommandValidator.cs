@@ -1,13 +1,16 @@
-﻿using FluentValidation;
+﻿#region
 
-namespace UdemyNewMicroservice.Basket.Api.Features.Baskets.ApplyDiscountCoupon
+using FluentValidation;
+
+#endregion
+
+namespace UdemyNewMicroservice.Basket.Api.Features.Baskets.ApplyDiscountCoupon;
+
+public class ApplyDiscountCouponCommandValidator : AbstractValidator<ApplyDiscountCouponCommand>
 {
-    public class ApplyDiscountCouponCommandValidator : AbstractValidator<ApplyDiscountCouponCommand>
+    public ApplyDiscountCouponCommandValidator()
     {
-        public ApplyDiscountCouponCommandValidator()
-        {
-            RuleFor(x => x.Coupon).NotEmpty().WithMessage("{PropertyName} is required");
-            RuleFor(x => x.DiscountRate).GreaterThan(0).WithMessage("{PropertyName} must be greater than zero");
-        }
+        RuleFor(x => x.Coupon).NotEmpty().WithMessage("{PropertyName} is required");
+        RuleFor(x => x.DiscountRate).GreaterThan(0).WithMessage("{PropertyName} must be greater than zero");
     }
 }

@@ -1,7 +1,11 @@
-﻿using MediatR;
+﻿#region
+
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using UdemyNewMicroservice.Order.Application.UseCases.Orders.GetOrders;
 using UdemyNewMicroservice.Shared.Extensions;
+
+#endregion
 
 namespace UdemyNewMicroservice.Order.Api.Endpoints.Orders;
 

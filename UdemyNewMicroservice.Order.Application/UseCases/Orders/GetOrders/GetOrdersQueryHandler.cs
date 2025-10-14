@@ -1,9 +1,13 @@
-﻿using AutoMapper;
+﻿#region
+
+using AutoMapper;
 using MediatR;
 using UdemyNewMicroservice.Order.Application.Contracts.Repositories;
 using UdemyNewMicroservice.Order.Application.UseCases.Orders.CreateOrder;
 using UdemyNewMicroservice.Shared;
 using UdemyNewMicroservice.Shared.Services;
+
+#endregion
 
 namespace UdemyNewMicroservice.Order.Application.UseCases.Orders.GetOrders;
 
