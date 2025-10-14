@@ -1,4 +1,4 @@
-﻿namespace UdemyNewMicroservice.Web.Pages.Instructor.Dto;
+﻿namespace UdemyNewMicroservice.Web.Dto;
 
 public record UpdateCourseRequest(
     Guid Id,

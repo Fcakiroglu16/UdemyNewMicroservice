@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 #endregion
 
-namespace UdemyNewMicroservice.Web.Pages.Instructor.ViewModel;
+namespace UdemyNewMicroservice.Web.ViewModel;
 
 public record CreateCourseViewModel
 {

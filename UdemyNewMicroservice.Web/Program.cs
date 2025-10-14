@@ -2,6 +2,7 @@
 
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Refit;
+using UdemyNewMicroservice.Web;
 using UdemyNewMicroservice.Web.DelegateHandlers;
 using UdemyNewMicroservice.Web.ExceptionHandlers;
 using UdemyNewMicroservice.Web.Extensions;

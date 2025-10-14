@@ -2,12 +2,10 @@
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using UdemyNewMicroservice.Web.Pages.Instructor.ViewModel;
-using UdemyNewMicroservice.Web.Services;
+using UdemyNewMicroservice.Web;
+using UdemyNewMicroservice.Web.ViewModel;
 
 #endregion
-
-namespace UdemyNewMicroservice.Web.Pages.Instructor;
 
 public class CoursesModel(CatalogService catalogService) : PageModel
 {

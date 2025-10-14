@@ -1,4 +1,4 @@
-﻿namespace UdemyNewMicroservice.Web.Pages.Instructor.ViewModel;
+﻿namespace UdemyNewMicroservice.Web.ViewModel;
 
 public record CourseViewModel(
     Guid Id,
@@ -6,6 +6,8 @@ public record CourseViewModel(
     string Description,
     decimal Price,
     string ImageUrl,
+    string Created,
+    string EducatorFullName,
     string CategoryName,
     int Duration,
     float Rating)

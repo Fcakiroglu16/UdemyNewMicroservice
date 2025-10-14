@@ -6,5 +6,6 @@ public record CourseDto(
     string Description,
     decimal Price,
     string ImageUrl,
+    DateTime Created,
     CategoryDto Category,
     FeatureDto Feature);

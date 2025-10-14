@@ -1,4 +1,10 @@
-﻿namespace UdemyNewMicroservice.Web.Pages.Instructor.Dto;
+﻿#region
+
+using UdemyNewMicroservice.Web.Pages.Instructor.Dto;
+
+#endregion
+
+namespace UdemyNewMicroservice.Web.Dto;
 
 public record CourseDto(
     Guid Id,
@@ -6,5 +12,6 @@ public record CourseDto(
     string Description,
     decimal Price,
     string ImageUrl,
+    DateTime Created,
     CategoryDto Category,
     FeatureDto Feature);

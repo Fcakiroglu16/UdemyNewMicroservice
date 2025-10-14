@@ -3,8 +3,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using UdemyNewMicroservice.Web.Pages.Instructor.ViewModel;
-using UdemyNewMicroservice.Web.Services;
+using UdemyNewMicroservice.Web.ViewModel;
 
 #endregion
 
