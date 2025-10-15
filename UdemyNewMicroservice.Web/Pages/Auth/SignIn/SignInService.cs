@@ -1,9 +1,9 @@
 ﻿#region
 
-using System.Security.Claims;
 using Duende.IdentityModel.Client;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
 using UdemyNewMicroservice.Web.Options;
 using UdemyNewMicroservice.Web.Services;
 
@@ -65,7 +65,8 @@ public class SignInService(
             ClientId = identityOption.Web.ClientId,
             ClientSecret = identityOption.Web.ClientSecret,
             UserName = signInViewModel.Email,
-            Password = signInViewModel.Password
+            Password = signInViewModel.Password,
+            Scope = "offline_access"
         });
 
         return tokenResponse;
