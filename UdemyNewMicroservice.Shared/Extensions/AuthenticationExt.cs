@@ -34,6 +34,13 @@ public static class AuthenticationExt
                 RoleClaimType = ClaimTypes.Role,
                 NameClaimType = ClaimTypes.NameIdentifier
             };
+
+
+            // AutomaticRefreshInterval: otomatik aralıkla metadata/JWKS yenileme (ör. 24saat)
+            options.AutomaticRefreshInterval = TimeSpan.FromHours(24);
+
+            // RefreshInterval: RequestRefresh() çağrıldıktan sonra beklenen min süre (ör. 30s)
+            options.RefreshInterval = TimeSpan.FromSeconds(30);
         }).AddJwtBearer("ClientCredentialSchema", options =>
         {
             options.Authority = identityOptions.Address;

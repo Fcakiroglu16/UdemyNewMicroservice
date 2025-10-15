@@ -1,9 +1,11 @@
 ﻿#region
 
-using System.Net;
 using Duende.IdentityModel.Client;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using System.Net;
+using System.Security.Claims;
 using UdemyNewMicroservice.Web.Services;
 
 #endregion
@@ -46,6 +48,20 @@ public class AuthenticatedHttpClientHandler(IHttpContextAccessor httpContextAcce
         if (tokenResponse.IsError) throw new UnauthorizedAccessException("Failed to refresh access token.");
 
         // TODO : Store the new tokens in the authentication properties
+
+        var authenticationProperties = tokenService.CreateAuthenticationProperties(tokenResponse);
+        var userClaim = httpContextAccessor.HttpContext.User.Claims;
+
+        var claimIdentity = new ClaimsIdentity(userClaim, CookieAuthenticationDefaults.AuthenticationScheme,
+            ClaimTypes.Name, ClaimTypes.Role);
+
+
+        var claimsPrincipal = new ClaimsPrincipal(claimIdentity);
+
+
+        await httpContextAccessor.HttpContext!.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+            claimsPrincipal, authenticationProperties);
+
 
         request.SetBearerToken(tokenResponse.AccessToken!);
 
