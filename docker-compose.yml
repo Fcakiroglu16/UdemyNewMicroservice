@@ -131,6 +131,54 @@ services:
       - rabbitmq_data:/var/lib/rabbitmq
 
 
+  udemynewmicroservice.web:
+    image: ${DOCKER_REGISTRY-}udemynewmicroserviceweb
+    build:
+      context: .
+      dockerfile: UdemyNewMicroservice.Web/Dockerfile
+
+  udemynewmicroservice.basket.api:
+    image: ${DOCKER_REGISTRY-}udemynewmicroservicebasketapi
+    build:
+      context: .
+      dockerfile: UdemyNewMicroservice.Basket.Api/Dockerfile
+
+  udemynewmicroservice.catalog.api:
+    image: ${DOCKER_REGISTRY-}udemynewmicroservicecatalogapi
+    build:
+      context: .
+      dockerfile: UdemyNewMicroservice.Catalog.Api/Dockerfile
+
+  udemynewmicroservice.discount.api:
+    image: ${DOCKER_REGISTRY-}udemynewmicroservicediscountapi
+    build:
+      context: .
+      dockerfile: UdemyNewMicroservice.Discount.Api/Dockerfile
+
+  udemynewmicroservice.file.api:
+    image: ${DOCKER_REGISTRY-}udemynewmicroservicefileapi
+    build:
+      context: .
+      dockerfile: UdemyNewMicroservice.File.Api/Dockerfile
+
+  udemynewmicroservice.gateway:
+    image: ${DOCKER_REGISTRY-}udemynewmicroservicegateway
+    build:
+      context: .
+      dockerfile: UdemyNewMicroservice.Gateway/Dockerfile
+
+  udemynewmicroservice.order.api:
+    image: ${DOCKER_REGISTRY-}udemynewmicroserviceorderapi
+    build:
+      context: .
+      dockerfile: UdemyNewMicroservice.Order.Api/Dockerfile
+
+  udemynewmicroservice.payment.api:
+    image: ${DOCKER_REGISTRY-}udemynewmicroservicepaymentapi
+    build:
+      context: .
+      dockerfile: UdemyNewMicroservice.Payment.Api/Dockerfile
+
 volumes:
   mongo.db.catalog.volume:
   redis.db.basket.volume:
@@ -139,3 +187,11 @@ volumes:
   posrgres.db.keycloak.volume:
   posrgres.db.keycloak.ui.volume:
   rabbitmq_data:
+
+
+
+
+
+
+
+

@@ -1,9 +1,9 @@
 ﻿#region
 
+using System.Security.Claims;
 using Duende.IdentityModel.Client;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using System.Security.Claims;
 using UdemyNewMicroservice.Web.Options;
 using UdemyNewMicroservice.Web.Services;
 
@@ -53,7 +53,7 @@ public class SignInService(
         };
 
         client.BaseAddress = new Uri(identityOption.Address);
-        var discoveryResponse = await client.GetDiscoveryDocumentAsync();
+        var discoveryResponse = await client.GetDiscoveryDocumentAsync(discoveryRequest);
 
         if (discoveryResponse.IsError)
             throw new Exception($"Discovery document request failed: {discoveryResponse.Error}");
