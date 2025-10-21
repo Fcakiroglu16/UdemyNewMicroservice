@@ -1,0 +1,102 @@
+
+services:
+  udemynewmicroservice.basket.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - BusOption:Address=rabbitmq
+      - BusOption:Port=5672
+      - IdentityOption:Address=http://keycloak:8080/realms/udemyTenant 
+      - IdentityOption:Issuer=http://keycloak:8080/realms/udemyTenant
+      - ConnectionStrings:Redis=redis.db.basket:6379,password=Password12 
+    ports:
+      - "8080"
+
+
+  udemynewmicroservice.catalog.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - BusOption:Address=rabbitmq
+      - BusOption:Port=5672
+      - IdentityOption:Address=http://keycloak:8080/realms/udemyTenant 
+      - IdentityOption:Issuer=http://keycloak:8080/realms/udemyTenant
+      - MongoOption:ConnectionString=mongodb://myuser:Password12@mongo.db.catalog:27017 
+    ports:
+      - "8080"
+
+
+  udemynewmicroservice.discount.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - BusOption:Address=rabbitmq
+      - BusOption:Port=5672
+      - IdentityOption:Address=http://keycloak:8080/realms/udemyTenant 
+      - IdentityOption:Issuer=http://keycloak:8080/realms/udemyTenant
+      - MongoOption:ConnectionString=mongodb://myuser:Password12@mongo.db.discount:27017 
+    ports:
+      - "8080"
+
+
+  udemynewmicroservice.file.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - BusOption:Address=rabbitmq
+      - BusOption:Port=5672
+      - IdentityOption:Address=http://keycloak:8080/realms/udemyTenant 
+      - IdentityOption:Issuer=http://keycloak:8080/realms/udemyTenant
+    ports:
+      - "8080"
+
+
+  udemynewmicroservice.gateway:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - IdentityOption:Address=http://keycloak:8080/realms/udemyTenant 
+      - IdentityOption:Issuer=http://keycloak:8080/realms/udemyTenant
+    ports:
+      - "8080"
+
+
+  udemynewmicroservice.order.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - BusOption:Address=rabbitmq
+      - BusOption:Port=5672
+      - IdentityOption:Address=http://keycloak:8080/realms/udemyTenant 
+      - IdentityOption:Issuer=http://keycloak:8080/realms/udemyTenant
+      - AddressUrlOption:PaymentUrl=http://udemynewmicroservice.payment.api:8080
+      - ConnectionStrings:SqlServer=Server=sqlserver.db.order,1433;Database=OrderDb;User=Sa;Password=Password12*;Trusted_Connection=False;TrustServerCertificate=True;Integrated Security=False
+    ports:
+      - "8080"
+  udemynewmicroservice.payment.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - BusOption:Address=rabbitmq
+      - BusOption:Port=5672
+      - IdentityOption:Address=http://keycloak:8080/realms/udemyTenant 
+      - IdentityOption:Issuer=http://keycloak:8080/realms/udemyTenant
+    ports:
+      - "8080"
+
+
+  udemynewmicroservice.web:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - MicroserviceOption:Catalog:BaseAddress=http://udemynewmicroservice.catalog.api:8080
+      - MicroserviceOption:File:BaseAddress=http://udemynewmicroservice.file.api:8080
+      - MicroserviceOption:Basket:BaseAddress=http://udemynewmicroservice.basket.api:8080
+      - MicroserviceOption:Discount:BaseAddress=http://udemynewmicroservice.discount.api:8080
+      - MicroserviceOption:Order:BaseAddress=http://udemynewmicroservice.order.api:8080
+      - GatewayOption:BaseAddress=http://udemynewmicroservice.gateway:8080
+      - IdentityOption:Address=http://keycloak:8080/realms/udemyTenant
+      - IdentityOption:BaseAddress=http://keycloak:8080
+    ports:
+      - "5050:8080"
+
