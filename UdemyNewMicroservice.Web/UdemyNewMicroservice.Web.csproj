@@ -12,4 +12,8 @@
     <PackageReference Include="Refit.HttpClientFactory" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\UdemyNewMicroservice.ServiceDefaults\UdemyNewMicroservice.ServiceDefaults.csproj" />
+  </ItemGroup>
+
 </Project>

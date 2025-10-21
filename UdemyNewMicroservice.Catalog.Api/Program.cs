@@ -9,6 +9,8 @@ using UdemyNewMicroservice.Catalog.Api.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddOptionsExt();
@@ -18,6 +20,8 @@ builder.Services.AddMasstransitExt(builder.Configuration);
 builder.Services.AddVersioningExt();
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 app.AddSeedDataExt().ContinueWith(x =>
 {

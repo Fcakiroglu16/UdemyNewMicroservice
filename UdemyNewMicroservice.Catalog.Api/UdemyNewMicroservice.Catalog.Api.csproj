@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\UdemyNewMicroservice.Bus\UdemyNewMicroservice.Bus.csproj" />
+    <ProjectReference Include="..\UdemyNewMicroservice.ServiceDefaults\UdemyNewMicroservice.ServiceDefaults.csproj" />
     <ProjectReference Include="..\UdemyNewMicroservice.Shared\UdemyNewMicroservice.Shared.csproj" />
   </ItemGroup>
 

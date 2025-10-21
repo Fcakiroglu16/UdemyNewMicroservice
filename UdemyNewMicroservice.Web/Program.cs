@@ -18,6 +18,8 @@ using UdemyNewMicroservice.Web.Services.Refit;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+
 
 builder.Services.AddDataProtection()
     .PersistKeysToFileSystem(Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "keys")))
@@ -91,6 +93,8 @@ builder.Services.AddAuthentication(configureOption =>
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 
 var cultureInfo = new CultureInfo("en-US");

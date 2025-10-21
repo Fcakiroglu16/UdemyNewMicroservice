@@ -64,6 +64,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ui", "ui", "{90C1A933-DBEA-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyNewMicroservice.Web", "UdemyNewMicroservice.Web\UdemyNewMicroservice.Web.csproj", "{CABC4426-D97A-4F71-8119-A8727BE2ABDA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyNewMicroservice.AppHost", "UdemyNewMicroservice.AppHost\UdemyNewMicroservice.AppHost.csproj", "{0F8FD200-32BC-4BBA-B25F-873FCD6D81C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyNewMicroservice.ServiceDefaults", "UdemyNewMicroservice.ServiceDefaults\UdemyNewMicroservice.ServiceDefaults.csproj", "{0360F99C-86A9-0A63-F4F0-6D3B15601DF9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -126,6 +130,14 @@ Global
 		{CABC4426-D97A-4F71-8119-A8727BE2ABDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CABC4426-D97A-4F71-8119-A8727BE2ABDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CABC4426-D97A-4F71-8119-A8727BE2ABDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F8FD200-32BC-4BBA-B25F-873FCD6D81C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F8FD200-32BC-4BBA-B25F-873FCD6D81C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F8FD200-32BC-4BBA-B25F-873FCD6D81C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F8FD200-32BC-4BBA-B25F-873FCD6D81C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0360F99C-86A9-0A63-F4F0-6D3B15601DF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0360F99C-86A9-0A63-F4F0-6D3B15601DF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0360F99C-86A9-0A63-F4F0-6D3B15601DF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0360F99C-86A9-0A63-F4F0-6D3B15601DF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

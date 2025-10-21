@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Sdk Name="Aspire.AppHost.Sdk" Version="9.3.1" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>82cc4da5-7b55-4273-9ce7-0add0a803b3d</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UdemyNewMicroservice.Basket.Api\UdemyNewMicroservice.Basket.Api.csproj" />
+    <ProjectReference Include="..\UdemyNewMicroservice.Catalog.Api\UdemyNewMicroservice.Catalog.Api.csproj" />
+    <ProjectReference Include="..\UdemyNewMicroservice.Discount.Api\UdemyNewMicroservice.Discount.Api.csproj" />
+    <ProjectReference Include="..\UdemyNewMicroservice.File.Api\UdemyNewMicroservice.File.Api.csproj" />
+    <ProjectReference Include="..\UdemyNewMicroservice.Gateway\UdemyNewMicroservice.Gateway.csproj" />
+    <ProjectReference Include="..\UdemyNewMicroservice.Order.Api\UdemyNewMicroservice.Order.Api.csproj" />
+    <ProjectReference Include="..\UdemyNewMicroservice.Payment.Api\UdemyNewMicroservice.Payment.Api.csproj" />
+    <ProjectReference Include="..\UdemyNewMicroservice.Web\UdemyNewMicroservice.Web.csproj" />
+  </ItemGroup>
+
+</Project>

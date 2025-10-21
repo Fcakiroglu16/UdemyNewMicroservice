@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\UdemyNewMicroservice.Order.Application\UdemyNewMicroservice.Order.Application.csproj" />
     <ProjectReference Include="..\UdemyNewMicroservice.Order.Persistence\UdemyNewMicroservice.Order.Persistence.csproj" />
+    <ProjectReference Include="..\UdemyNewMicroservice.ServiceDefaults\UdemyNewMicroservice.ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>
