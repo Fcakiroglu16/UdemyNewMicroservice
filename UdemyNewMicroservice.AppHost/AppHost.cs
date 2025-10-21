@@ -21,7 +21,7 @@ var rabbitMq = builder.AddRabbitMQ("rabbitMQ", rabbitMqUserName, rabbitMqPasswor
 
 var postgresUser = builder.AddParameter("POSTGRES-USER");
 var postgresPassword = builder.AddParameter("POSTGRES-PASSWORD");
-var keycloakDb = "keycloak_db";
+var keycloakDb = "keycloak-db";
 
 var postgresDb = builder
     .AddPostgres("postgres-db-keycloak", postgresUser, postgresPassword, 5432)

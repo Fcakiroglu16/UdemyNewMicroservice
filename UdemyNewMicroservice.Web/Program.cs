@@ -72,7 +72,7 @@ builder.Services.AddRefitClient<IDiscountRefitService>().ConfigureHttpClient(con
 builder.Services.AddRefitClient<IOrderRefitService>().ConfigureHttpClient(configure =>
     {
         var microserviceOption = builder.Configuration.GetSection(nameof(MicroserviceOption)).Get<MicroserviceOption>();
-        configure.BaseAddress = new Uri("http://udemynewmicroservice-basket-api");
+        configure.BaseAddress = new Uri("http://udemynewmicroservice-order-api");
     }).AddHttpMessageHandler<AuthenticatedHttpClientHandler>()
     .AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
 
