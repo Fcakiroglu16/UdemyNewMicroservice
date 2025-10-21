@@ -72,10 +72,6 @@ public class Order : BaseEntity<Guid>
     {
         var orderItem = new OrderItem();
 
-
-        if (DiscountRate.HasValue) unitPrice -= unitPrice * (decimal)DiscountRate.Value / 100;
-
-
         orderItem.SetItem(productId, productName, unitPrice);
         OrderItems.Add(orderItem);
 

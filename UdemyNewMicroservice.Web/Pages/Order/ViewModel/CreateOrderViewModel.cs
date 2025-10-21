@@ -31,6 +31,6 @@ public record CreateOrderViewModel
     public void AddOrderItem(BasketItemViewModel basketItem)
     {
         OrderItems.Add(new OrderItemViewModel(basketItem.Id, basketItem.Name,
-            basketItem.Price));
+            basketItem.PriceByApplyDiscountRate ?? basketItem.Price));
     }
 }

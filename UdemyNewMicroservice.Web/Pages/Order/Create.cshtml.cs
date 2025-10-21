@@ -44,7 +44,9 @@ public class CreateModel(BasketService basketService, OrderService orderService)
             return;
         }
 
-        CreateOrderViewModel.TotalPrice = basketAsResult.Data!.TotalPrice;
+        CreateOrderViewModel.TotalPrice =
+            basketAsResult.Data.TotalPriceWithAppliedDiscount ?? basketAsResult.Data!.TotalPrice;
+
         CreateOrderViewModel.DiscountRate = basketAsResult.Data.DiscountRate;
         foreach (var basketItem in basketAsResult.Data!.Items) CreateOrderViewModel.AddOrderItem(basketItem);
     }

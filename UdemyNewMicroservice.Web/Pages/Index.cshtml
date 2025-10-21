@@ -5,7 +5,7 @@
 }
 
 <div class="container mt-5">
-    <h1 class="mb-4">Kurslar</h1>
+    <h1 class="mb-4">Courses</h1>
     <div class="row row-cols-1 row-cols-md-3 g-4">
 
 
@@ -13,7 +13,7 @@
         {
             <div class="col">
                 <div class="alert alert-warning" role="alert">
-                    Henüz hiç kurs eklenmemiş.
+                    No Courses Found!
                 </div>
             </div>
             return;
@@ -31,19 +31,19 @@
                         <h5 class="card-title">@course.Name</h5>
                         <p class="card-text">@course.TruncateDescription(100)</p>
                         <p class="card-text">
-                            <small class="text-muted">Kategori: <strong>@course.Name</strong></small>
+                            <small class="text-muted">Category: <strong>@course.Name</strong></small>
                         </p>
                         <p class="card-text">
                             <strong>@course.Price.ToString("C")</strong>
                         </p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">Eğitmen: <strong>@course.EducatorFullName</strong></small><br>
-                        <small class="text-muted">Oluşturulma Tarihi: <strong>@course.Created</strong></small><br>
-                        <small class="text-muted">Puan: <strong>@course.Rating</strong> | Süre: <strong>@course.Duration</strong> saat</small>
+                        <small class="text-muted">Instructor: <strong>@course.EducatorFullName</strong></small><br>
+                        <small class="text-muted">Created Date: <strong>@course.Created</strong></small><br>
+                        <small class="text-muted">Point : <strong>@course.Rating</strong> | Süre: <strong>@course.Duration</strong> saat</small>
 
                         <br>
-                        <a asp-page="/Courses/Detail" asp-route-id="@course.Id" class="btn btn-primary mt-2">Detay Gör</a>
+                        <a asp-page="/Courses/Detail" asp-route-id="@course.Id" class="btn btn-primary mt-2">Show Detail</a>
                     </div>
                 </div>
             </div>
