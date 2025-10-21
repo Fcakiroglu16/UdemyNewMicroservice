@@ -1,7 +1,7 @@
 ﻿#region
 
-using System.Net;
 using Duende.IdentityModel.Client;
+using System.Net;
 using UdemyNewMicroservice.Web.Options;
 using UdemyNewMicroservice.Web.Services;
 
@@ -61,7 +61,7 @@ public class SignUpService(IdentityOption identityOption, HttpClient client, ILo
         };
 
         client.BaseAddress = new Uri(identityOption.Address);
-        var discoveryResponse = await client.GetDiscoveryDocumentAsync();
+        var discoveryResponse = await client.GetDiscoveryDocumentAsync(discoveryRequest);
 
         if (discoveryResponse.IsError)
             throw new Exception($"Discovery document request failed: {discoveryResponse.Error}");

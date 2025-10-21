@@ -53,7 +53,7 @@ public class SignInService(
         };
 
         client.BaseAddress = new Uri(identityOption.Address);
-        var discoveryResponse = await client.GetDiscoveryDocumentAsync();
+        var discoveryResponse = await client.GetDiscoveryDocumentAsync(discoveryRequest);
 
         if (discoveryResponse.IsError)
             throw new Exception($"Discovery document request failed: {discoveryResponse.Error}");
