@@ -1,7 +1,9 @@
 #region
 
+using System.Globalization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Localization;
 using Refit;
 using UdemyNewMicroservice.Web.DelegateHandlers;
 using UdemyNewMicroservice.Web.ExceptionHandlers;
@@ -89,6 +91,18 @@ builder.Services.AddAuthentication(configureOption =>
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
+
+
+var cultureInfo = new CultureInfo("en-US");
+CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture(cultureInfo),
+    SupportedCultures = [cultureInfo],
+    SupportedUICultures = [cultureInfo]
+});
 
 // Configure the HTTP request pipeline.
 app.UseExceptionHandler("/Error");
