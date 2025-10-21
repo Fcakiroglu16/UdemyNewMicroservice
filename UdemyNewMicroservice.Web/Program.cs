@@ -1,10 +1,10 @@
 #region
 
-using System.Globalization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Localization;
 using Refit;
+using System.Globalization;
 using UdemyNewMicroservice.Web.DelegateHandlers;
 using UdemyNewMicroservice.Web.ExceptionHandlers;
 using UdemyNewMicroservice.Web.Extensions;
@@ -48,7 +48,7 @@ builder.Services.AddExceptionHandler<UnauthorizedAccessExceptionHandler>();
 builder.Services.AddRefitClient<ICatalogRefitService>().ConfigureHttpClient(configure =>
     {
         var microserviceOption = builder.Configuration.GetSection(nameof(MicroserviceOption)).Get<MicroserviceOption>();
-        configure.BaseAddress = new Uri(microserviceOption!.Catalog.BaseAddress);
+        configure.BaseAddress = new Uri("http://udemynewmicroservice-catalog-api");
     }).AddHttpMessageHandler<AuthenticatedHttpClientHandler>()
     .AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
 
@@ -56,7 +56,7 @@ builder.Services.AddRefitClient<ICatalogRefitService>().ConfigureHttpClient(conf
 builder.Services.AddRefitClient<IBasketRefitService>().ConfigureHttpClient(configure =>
     {
         var microserviceOption = builder.Configuration.GetSection(nameof(MicroserviceOption)).Get<MicroserviceOption>();
-        configure.BaseAddress = new Uri(microserviceOption!.Basket.BaseAddress);
+        configure.BaseAddress = new Uri("http://udemynewmicroservice-basket-api");
     }).AddHttpMessageHandler<AuthenticatedHttpClientHandler>()
     .AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
 
@@ -64,7 +64,7 @@ builder.Services.AddRefitClient<IBasketRefitService>().ConfigureHttpClient(confi
 builder.Services.AddRefitClient<IDiscountRefitService>().ConfigureHttpClient(configure =>
     {
         var microserviceOption = builder.Configuration.GetSection(nameof(MicroserviceOption)).Get<MicroserviceOption>();
-        configure.BaseAddress = new Uri(microserviceOption!.Discount.BaseAddress);
+        configure.BaseAddress = new Uri("http://udemynewmicroservice-discount-api");
     }).AddHttpMessageHandler<AuthenticatedHttpClientHandler>()
     .AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
 
@@ -72,7 +72,7 @@ builder.Services.AddRefitClient<IDiscountRefitService>().ConfigureHttpClient(con
 builder.Services.AddRefitClient<IOrderRefitService>().ConfigureHttpClient(configure =>
     {
         var microserviceOption = builder.Configuration.GetSection(nameof(MicroserviceOption)).Get<MicroserviceOption>();
-        configure.BaseAddress = new Uri(microserviceOption!.Order.BaseAddress);
+        configure.BaseAddress = new Uri("http://udemynewmicroservice-basket-api");
     }).AddHttpMessageHandler<AuthenticatedHttpClientHandler>()
     .AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
 

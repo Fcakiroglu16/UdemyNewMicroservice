@@ -25,10 +25,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCommonServiceExt(typeof(OrderApplicationAssembly));
 builder.Services.AddCommonMasstransitExt(builder.Configuration);
-builder.Services.AddDbContext<AppDbContext>(option =>
-{
-    option.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
-});
+//builder.Services.AddDbContext<AppDbContext>(option =>
+//{
+//    option.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
+//});
+builder.AddSqlServerDbContext<AppDbContext>("order-db-aspire");
 builder.Services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
 
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
@@ -42,6 +43,13 @@ builder.Services.AddRefitConfigurationExt(builder.Configuration);
 builder.Services.AddHostedService<CheckPaymentStatusOrderBackgroundService>();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    await dbContext.Database.MigrateAsync();
+}
+
 
 app.MapDefaultEndpoints();
 app.AddOrderGroupEndpointExt(app.AddVersionSetExt());
